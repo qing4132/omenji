@@ -118,17 +118,6 @@ export default function Home() {
     draw();
   };
 
-  // 点一下即摇签：摇 500ms 后自动掉签
-  const tapShake = () => {
-    if (phase !== 'idle') return;
-    setPhase('shaking');
-    holdStartRef.current = Date.now();
-    setTimeout(() => {
-      // 用 setTimeout 闭包里的 draw 没问题：draw 是 useCallback，依赖空，引用稳定
-      draw();
-    }, 500);
-  };
-
   const handleReroll = () => {
     setRerollTaps((n) => {
       const next = n + 1;
@@ -158,35 +147,35 @@ export default function Home() {
         {!oracle && (phase === 'idle' || phase === 'shaking') && (
           <button
             type="button"
-            onClick={tapShake}
-            onPointerUp={tapShake}
-            onTouchEnd={(e) => {
+            onPointerDown={(e) => {
               e.preventDefault();
-              tapShake();
+              try {
+                (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+              } catch {}
+              startShake();
             }}
+            onPointerUp={() => endShake()}
+            onPointerCancel={() => endShake()}
             style={{
-              touchAction: 'manipulation',
+              touchAction: 'none',
               WebkitTapHighlightColor: 'transparent',
               WebkitTouchCallout: 'none',
               WebkitUserSelect: 'none',
               userSelect: 'none',
               WebkitAppearance: 'none',
             }}
-            className={`flex h-64 w-44 cursor-pointer select-none flex-col items-center justify-center rounded-full border border-zinc-400/40 bg-gradient-to-b shadow-inner transition-colors active:scale-[0.98] ${
+            className={`flex h-64 w-44 cursor-pointer select-none flex-col items-center justify-center rounded-full border shadow-inner transition-colors active:scale-[0.98] ${
               phase === 'shaking'
-                ? 'animate-[shake_0.25s_ease-in-out_infinite] from-amber-100 to-amber-200 dark:from-zinc-700 dark:to-zinc-800'
-                : 'from-amber-50 to-amber-100 dark:from-zinc-800 dark:to-zinc-900'
+                ? 'animate-[shake_0.25s_ease-in-out_infinite] border-amber-800/40 bg-gradient-to-b from-amber-100 to-amber-200/80 dark:border-zinc-600/60 dark:from-zinc-700 dark:to-zinc-800'
+                : 'border-zinc-400/40 bg-gradient-to-b from-amber-50 to-amber-100/70 dark:from-zinc-800 dark:to-zinc-900'
             }`}
           >
-            <span className="text-5xl">{phase === 'shaking' ? '🎋' : '🪄'}</span>
-            <span className="mt-4 text-sm tracking-widest text-zinc-700 dark:text-zinc-300">
-              {phase === 'shaking' ? '摇…摇…摇…' : '点一下摇签'}
+            <span className="font-serif text-[88px] leading-none text-zinc-700 dark:text-zinc-200">
+              {phase === 'shaking' ? '⋯' : '签'}
             </span>
-            {phase === 'idle' && (
-              <span className="mt-1 text-[10px] tracking-wider text-zinc-400">
-                桌面端也可按空格
-              </span>
-            )}
+            <span className="mt-6 text-[11px] tracking-[0.5em] text-zinc-500 dark:text-zinc-400">
+              {phase === 'shaking' ? '摇 · 摇 · 摇' : '按住 · 摇签'}
+            </span>
           </button>
         )}
 
