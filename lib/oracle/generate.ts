@@ -1,4 +1,4 @@
-import { POEMS, DO_ITEMS, DONT_ITEMS, DIRECTIONS, LUCKY_NUMS, LEVELS } from './poems';
+import { POEMS, DIRECTIONS, LUCKY_NUMS } from './poems';
 import { chance, makeRng, pick } from './rng';
 import type { OracleContext, OracleResult, Rarity } from './types';
 
@@ -47,24 +47,29 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
 
   if (rarity === 'meta') {
     result.number = '〇';
-    result.level = '空';
+    result.level = poem.level;
     return result;
   }
 
   if (chance(rng, 0.8)) {
     result.number = String(1 + Math.floor(rng() * 100));
   }
-  if (chance(rng, 0.85)) {
-    if (rarity === 'rare') {
-      result.level = pick(rng, ['上上', '上上', '下下', '下下', '空'] as const);
-    } else {
-      result.level = pick(rng, LEVELS);
-    }
+
+  // 吉凶等级直接取自诗本身（与诗意绑定），90% 显示
+  if (chance(rng, 0.9)) {
+    result.level = poem.level;
   }
-  if (chance(rng, 0.6)) {
-    result.do = pick(rng, DO_ITEMS);
-    result.dont = pick(rng, DONT_ITEMS);
+
+  // 宜/忌：只从这首诗自己的候选里抽，必然与诗意一致
+  // 70% 同时出宜+忌；20% 只出宜；10% 只出忌
+  if (poem.do.length > 0 || poem.dont.length > 0) {
+    const r = rng();
+    const showDo = r < 0.9 && poem.do.length > 0;
+    const showDont = (r < 0.7 || r >= 0.9) && poem.dont.length > 0;
+    if (showDo) result.do = pick(rng, poem.do);
+    if (showDont) result.dont = pick(rng, poem.dont);
   }
+
   if (chance(rng, 0.3)) result.direction = pick(rng, DIRECTIONS);
   if (chance(rng, 0.3)) result.lucky = pick(rng, LUCKY_NUMS);
 

@@ -9,6 +9,12 @@ export type Poem = {
   lines: [string, string, string, string];
   emojis: readonly string[];
   theme?: string;
+  /** 与诗意匹配的吉凶等级 */
+  level: Level;
+  /** 与诗意匹配的"宜"候选词 */
+  do: readonly string[];
+  /** 与诗意匹配的"忌"候选词 */
+  dont: readonly string[];
 };
 
 export type OracleResult = {
