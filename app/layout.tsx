@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "签出 Omenji — 今日一签",
-  description: "omen + emoji。按住签筒，掰出今日一只 emoji 签，配一段不知所云但很有禅意的解签。",
+  title: "签出 Omenji — 摇出今日一签",
+  description: "omen + emoji。按住签筒，摇出今日一只 emoji 签，配一段不知所云但很有禅意的解签。",
 };
 
 export default function RootLayout({

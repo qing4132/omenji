@@ -139,7 +139,7 @@ export default function Home() {
       <header className="w-full max-w-md text-center">
         <h1 className="text-2xl font-semibold tracking-widest">签出 · Omenji</h1>
         <p className="mt-1 text-xs tracking-wider text-zinc-500">
-          按住签筒，掰出今日一签
+          按住签筒，摇出今日一签
         </p>
       </header>
 
@@ -174,7 +174,7 @@ export default function Home() {
               {phase === 'shaking' ? '⋯' : '签'}
             </span>
             <span className="mt-6 text-[11px] tracking-[0.5em] text-zinc-500 dark:text-zinc-400">
-              {phase === 'shaking' ? '·  ·  ·' : '按 · 住'}
+              {phase === 'shaking' ? '摇 · 摇 · 摇' : '按住 · 摇签'}
             </span>
           </button>
         )}
