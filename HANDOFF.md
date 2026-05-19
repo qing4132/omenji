@@ -88,8 +88,8 @@ type Skeleton = {
 - 每个槽位有"是否出现"的概率，不是必填
 
 ### Step 3：UI（在生成器跑通之后）
-- 首页：签筒 + 摇/按钮
-- 摇动手势：`DeviceMotionEvent`（iOS 13+ 需 `requestPermission`）
+- 首页：签筒 + 按钮
+- 按住手势：PointerEvents + `setPointerCapture`（跨鼠标/触控/笔统一处理）
 - 桌面：长按空格"晃动"，松开掉签
 - 出签动画：emoji 缩放浮现 → 签文 typewriter
 - 长图分享：用 `html-to-image`
