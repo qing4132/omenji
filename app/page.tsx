@@ -159,9 +159,8 @@ export default function Home() {
           <button
             type="button"
             onClick={tapShake}
-            style={{ touchAction: 'manipulation' }}
-            disabled={phase === 'shaking'}
-            className={`flex h-64 w-44 select-none flex-col items-center justify-center rounded-full border border-zinc-400/40 bg-gradient-to-b shadow-inner transition-colors active:scale-[0.98] ${
+            style={{ touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent' }}
+            className={`flex h-64 w-44 cursor-pointer select-none flex-col items-center justify-center rounded-full border border-zinc-400/40 bg-gradient-to-b shadow-inner transition-colors active:scale-[0.98] ${
               phase === 'shaking'
                 ? 'animate-[shake_0.25s_ease-in-out_infinite] from-amber-100 to-amber-200 dark:from-zinc-700 dark:to-zinc-800'
                 : 'from-amber-50 to-amber-100 dark:from-zinc-800 dark:to-zinc-900'
