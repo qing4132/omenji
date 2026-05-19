@@ -51,9 +51,8 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
     result.number = String(1 + Math.floor(rng() * 100));
   }
 
-  if (chance(rng, 0.9)) {
-    result.level = poem.level;
-  }
+  // 吉凶等级 = 诗本身决定的核心信息，必显示
+  result.level = poem.level;
 
   if (poem.do.length > 0 || poem.dont.length > 0) {
     const r = rng();
