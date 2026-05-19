@@ -197,12 +197,48 @@ export default function Home() {
             </p>
             {phase === 'done' &&
               (oracle.do || oracle.dont || oracle.direction || oracle.lucky) && (
-                <div className="mt-2 grid grid-cols-2 gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  {oracle.do && <div>宜　{oracle.do.join('、')}</div>}
-                  {oracle.dont && <div>忌　{oracle.dont.join('、')}</div>}
-                  {oracle.direction && <div>方位　{oracle.direction}</div>}
-                  {oracle.lucky && <div>数　{oracle.lucky}</div>}
-                </div>
+                <dl className="mt-4 w-full max-w-xs divide-y divide-zinc-300/60 border-y border-zinc-300/60 text-sm dark:divide-zinc-700/60 dark:border-zinc-700/60">
+                  {oracle.do && (
+                    <div className="grid grid-cols-[3em_1fr] items-baseline gap-3 py-2">
+                      <dt className="text-xs tracking-[0.3em] text-zinc-400 dark:text-zinc-500">
+                        宜
+                      </dt>
+                      <dd className="text-zinc-700 dark:text-zinc-200">
+                        {oracle.do.join(' · ')}
+                      </dd>
+                    </div>
+                  )}
+                  {oracle.dont && (
+                    <div className="grid grid-cols-[3em_1fr] items-baseline gap-3 py-2">
+                      <dt className="text-xs tracking-[0.3em] text-zinc-400 dark:text-zinc-500">
+                        忌
+                      </dt>
+                      <dd className="text-zinc-700 dark:text-zinc-200">
+                        {oracle.dont.join(' · ')}
+                      </dd>
+                    </div>
+                  )}
+                  {oracle.direction && (
+                    <div className="grid grid-cols-[3em_1fr] items-baseline gap-3 py-2">
+                      <dt className="text-xs tracking-[0.3em] text-zinc-400 dark:text-zinc-500">
+                        方位
+                      </dt>
+                      <dd className="text-zinc-700 dark:text-zinc-200">
+                        {oracle.direction}
+                      </dd>
+                    </div>
+                  )}
+                  {oracle.lucky && (
+                    <div className="grid grid-cols-[3em_1fr] items-baseline gap-3 py-2">
+                      <dt className="text-xs tracking-[0.3em] text-zinc-400 dark:text-zinc-500">
+                        数
+                      </dt>
+                      <dd className="text-zinc-700 dark:text-zinc-200">
+                        {oracle.lucky}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
               )}
           </div>
         )}
