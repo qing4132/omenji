@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>签出 · 主页设计选型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Long+Cang&family=ZCOOL+QingKe+HuangYou&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: #ececec; color: #222;
+    padding: 40px 24px 80px;
+  }
+  .page-head { max-width: 1200px; margin: 0 auto 32px; }
+  .page-head h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+  .page-head p { color: #666; font-size: 14px; }
+  .grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 32px;
+  }
+  .card { display: flex; flex-direction: column; gap: 12px; }
+  .label {
+    display: flex; align-items: baseline; gap: 10px;
+    padding-left: 4px;
+  }
+  .label .n { font-size: 13px; color: #999; font-variant-numeric: tabular-nums; }
+  .label .name { font-size: 16px; font-weight: 600; color: #222; }
+  .label .desc { font-size: 12px; color: #888; }
+
+  /* —— 手机外壳 —— */
+  .phone {
+    width: 360px; height: 740px;
+    border-radius: 36px;
+    background: #111;
+    padding: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08);
+    margin: 0 auto;
+  }
+  .screen {
+    width: 100%; height: 100%;
+    border-radius: 26px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    padding: 32px 24px 24px;
+    position: relative;
+  }
+  .brand { font-size: 14px; letter-spacing: 0.3em; text-align: center; }
+  .sub { font-size: 11px; letter-spacing: 0.25em; text-align: center; margin-top: 6px; opacity: .55; }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; }
+  .emoji { font-size: 56px; line-height: 1; }
+  .chips { display: flex; gap: 8px; font-size: 11px; }
+  .chip { padding: 2px 10px; border-radius: 999px; border: 1px solid; }
+  .poem {
+    font-family: 'Noto Serif SC', serif;
+    text-align: center;
+    font-size: 18px;
+    line-height: 2.2;
+    letter-spacing: 0.18em;
+  }
+  .poem > div { white-space: nowrap; }
+  .tail {
+    width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px;
+    font-size: 12px; margin-top: 8px;
+  }
+  .tail .k { opacity: .6; margin-right: 6px; }
+  .date { text-align: center; font-size: 10px; letter-spacing: 0.3em; opacity: .5; }
+
+  /* ============================================================
+     V1 · 现状（暖米色 / 当代禅）
+     ============================================================ */
+  .v1 .screen { background: #f5f2ec; color: #18181b; }
+  .v1 .brand { font-weight: 600; }
+  .v1 .chip { border-color: #a1a1aa66; color: #71717a; }
+  .v1 .poem { color: #1f2937; }
+  .v1 .tail { color: #52525b; }
+
+  /* ============================================================
+     V2 · 传统寺庙签（朱红朱黄 / 楷书）
+     ============================================================ */
+  .v2 .screen {
+    background:
+      radial-gradient(circle at 50% 0%, #f6d27a 0%, #f4c25a 40%, #e9b04a 100%);
+    color: #4a1810;
+  }
+  .v2 .brand {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 16px; font-weight: 700;
+    color: #8b1a1a;
+  }
+  .v2 .sub { color: #8b1a1a; opacity: .7; }
+  .v2 .emoji {
+    width: 96px; height: 96px;
+    background: #b1281e;
+    color: white;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: 0 6px 0 #6f1310, inset 0 -3px 6px rgba(0,0,0,.2);
+  }
+  .v2 .chip { border-color: #8b1a1a; color: #8b1a1a; background: rgba(255,255,255,.4); }
+  .v2 .poem {
+    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+    color: #3a0e08;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .v2 .tail { color: #5c1d12; font-family: 'ZCOOL XiaoWei', serif; font-size: 13px; }
+  .v2 .date { color: #8b1a1a; }
+  .v2 .stamp {
+    position: absolute; right: 18px; bottom: 56px;
+    width: 56px; height: 56px;
+    border: 3px solid #b1281e; color: #b1281e;
+    display: grid; place-items: center;
+    font-family: 'ZCOOL XiaoWei', serif; font-size: 18px;
+    transform: rotate(-8deg); opacity: .85;
+    background: rgba(255,255,255,.1);
+  }
+
+  /* ============================================================
+     V3 · 暗夜禅（深蓝紫黑 / 月光）
+     ============================================================ */
+  .v3 .screen {
+    background: radial-gradient(120% 80% at 50% 0%, #1a2240 0%, #0a0c1e 60%, #050714 100%);
+    color: #e8e4d5;
+  }
+  .v3 .brand { color: #d4cfa8; opacity: .8; }
+  .v3 .sub { color: #c0b97d; }
+  .v3 .emoji { filter: drop-shadow(0 0 18px rgba(217, 207, 132, .6)); }
+  .v3 .chip { border-color: #c0b97d44; color: #c0b97d; }
+  .v3 .poem { color: #f4ecc8; }
+  .v3 .tail { color: #b8b29a; }
+  .v3 .date { color: #837f63; }
+  .v3 .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 12%, #fff8 50%, transparent 51%),
+      radial-gradient(1px 1px at 70% 18%, #fff6 50%, transparent 51%),
+      radial-gradient(1px 1px at 45% 30%, #fff5 50%, transparent 51%),
+      radial-gradient(1px 1px at 85% 8%, #fff4 50%, transparent 51%);
+    pointer-events: none;
+  }
+
+  /* ============================================================
+     V4 · 古籍竖排（米黄宣纸 / 楷书 / 竖排）
+     ============================================================ */
+  .v4 .screen {
+    background: #f0e3c4;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(120,80,40,.04) 0 1px, transparent 1px 36px);
+    color: #2a1a0a;
+    padding: 28px 18px;
+  }
+  .v4 .brand {
+    font-family: 'ZCOOL XiaoWei', serif; font-weight: 700;
+    color: #6a2920;
+  }
+  .v4 .sub { color: #6a2920; opacity: .65; }
+  .v4 .body { justify-content: flex-start; padding-top: 12px; gap: 14px; }
+  .v4 .emoji { font-size: 44px; }
+  .v4 .chips { font-family: 'ZCOOL XiaoWei', serif; }
+  .v4 .chip { border-color: #6a2920; color: #6a2920; }
+  .v4 .poem {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-family: 'Noto Serif SC', 'ZCOOL XiaoWei', serif;
+    font-size: 19px;
+    line-height: 1.8;
+    letter-spacing: 0.25em;
+    color: #1a0a04;
+    height: 240px;
+    margin-top: 8px;
+  }
+  .v4 .poem > div { display: inline-block; margin-left: 14px; white-space: normal; }
+  .v4 .tail {
+    grid-template-columns: 1fr 1fr;
+    font-family: 'ZCOOL XiaoWei', serif;
+    color: #4a1a10;
+    border-top: 1px solid #6a292055;
+    padding-top: 10px;
+  }
+  .v4 .date { color: #6a2920; font-family: 'ZCOOL XiaoWei', serif; opacity: .7; }
+  .v4 .seal {
+    position: absolute; right: 14px; top: 18px;
+    width: 32px; height: 32px;
+    background: #b1281e; color: #fffbe6;
+    display: grid; place-items: center;
+    font-family: 'ZCOOL XiaoWei', serif; font-size: 13px;
+    border-radius: 3px;
+  }
+
+  /* ============================================================
+     V5 · 极简白底（Apple-ish 大留白）
+     ============================================================ */
+  .v5 .screen { background: #ffffff; color: #0a0a0a; }
+  .v5 .brand { font-weight: 300; letter-spacing: 0.5em; font-size: 11px; color: #999; }
+  .v5 .sub { display: none; }
+  .v5 .body { gap: 28px; }
+  .v5 .emoji { font-size: 80px; }
+  .v5 .chips { font-size: 10px; letter-spacing: 0.2em; opacity: .55; }
+  .v5 .chip { border: none; padding: 0; }
+  .v5 .chip + .chip::before { content: '·'; margin: 0 8px; }
+  .v5 .poem { font-weight: 400; font-size: 17px; line-height: 2.4; color: #1a1a1a; letter-spacing: 0.2em; }
+  .v5 .tail { font-size: 11px; opacity: .55; letter-spacing: 0.15em; margin-top: 16px; }
+  .v5 .date { letter-spacing: 0.4em; opacity: .35; }
+
+  /* ============================================================
+     V6 · 水墨山水（宣纸 / 远山 SVG）
+     ============================================================ */
+  .v6 .screen {
+    background: #f5efe0;
+    color: #1c1c1c;
+    position: relative;
+  }
+  .v6 .screen::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse at 50% 15%, rgba(50,40,30,.10) 0%, transparent 50%),
+      radial-gradient(circle at 80% 0%, rgba(0,0,0,.06) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .v6 .brand { font-family: 'Noto Serif SC', serif; font-weight: 600; color: #1a1a1a; }
+  .v6 .sub { color: #1a1a1a; opacity: .55; }
+  .v6 .chip { border-color: #1a1a1a55; color: #1a1a1a; background: rgba(255,255,255,.4); }
+  .v6 .poem { font-family: 'Noto Serif SC', serif; font-weight: 600; color: #0a0a0a; }
+  .v6 .tail { color: #2a2a2a; font-family: 'Noto Serif SC', serif; }
+  .v6 .mountains {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 110px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 110' preserveAspectRatio='none'><path d='M0 80 L40 50 L80 70 L120 30 L160 60 L210 20 L260 55 L300 35 L360 70 L360 110 L0 110 Z' fill='%231a1a1a' opacity='.18'/><path d='M0 95 L60 70 L110 85 L170 60 L230 80 L290 65 L360 90 L360 110 L0 110 Z' fill='%231a1a1a' opacity='.30'/></svg>") center bottom / 100% 100% no-repeat;
+    pointer-events: none;
+  }
+  .v6 .date { color: #1a1a1a; opacity: .5; position: relative; z-index: 1; }
+
+  /* ============================================================
+     V7 · 赛博终端（黑底磷绿 / 等宽）
+     ============================================================ */
+  .v7 .screen {
+    background: #050505;
+    color: #00ff66;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    padding: 24px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .v7 .screen::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(0,255,102,.04) 0 1px, transparent 1px 3px);
+    pointer-events: none;
+  }
+  .v7 .brand { font-family: 'JetBrains Mono', monospace; color: #00ff66; letter-spacing: 0.1em; text-align: left; font-weight: 700; }
+  .v7 .brand::before { content: '$ '; opacity: .5; }
+  .v7 .sub { text-align: left; color: #00ff6688; }
+  .v7 .body { align-items: flex-start; gap: 12px; padding-top: 18px; }
+  .v7 .emoji {
+    font-size: 48px;
+    filter: drop-shadow(0 0 8px rgba(0,255,102,.5));
+  }
+  .v7 .chips { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  .v7 .chip {
+    border: 1px solid #00ff66; color: #00ff66; background: transparent;
+    border-radius: 0; padding: 1px 6px;
+  }
+  .v7 .poem {
+    font-family: 'JetBrains Mono', 'Noto Serif SC', monospace;
+    color: #00ff66;
+    font-size: 16px;
+    line-height: 1.8; letter-spacing: 0.1em;
+    text-align: left;
+    white-space: pre;
+  }
+  .v7 .poem > div::before { content: '> '; color: #00ff6655; }
+  .v7 .tail { color: #00cc55; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  .v7 .tail .k { opacity: .5; }
+  .v7 .date { text-align: left; color: #00ff6655; font-family: 'JetBrains Mono', monospace; }
+  .v7 .cursor {
+    display: inline-block; width: 8px; height: 14px;
+    background: #00ff66; margin-left: 4px;
+    animation: blink 1s steps(1) infinite;
+    vertical-align: middle;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ============================================================
+     V8 · 手账纸张（横线纸 + 胶带 + 手写体）
+     ============================================================ */
+  .v8 .screen {
+    background:
+      repeating-linear-gradient(transparent 0 31px, #b4cbe6 31px 32px),
+      #fbf8ed;
+    color: #1f3a6b;
+  }
+  .v8 .brand { font-family: 'Ma Shan Zheng', cursive; font-size: 22px; color: #d44b3d; text-align: left; letter-spacing: 0; padding-left: 12px; }
+  .v8 .sub { font-family: 'Long Cang', cursive; text-align: left; color: #2e5497; opacity: .6; padding-left: 12px; }
+  .v8 .body { padding: 12px; gap: 10px; }
+  .v8 .emoji { font-size: 56px; transform: rotate(-6deg); }
+  .v8 .chips { font-family: 'Long Cang', cursive; font-size: 14px; }
+  .v8 .chip { border-color: #d44b3d; color: #d44b3d; background: #fdf3a8; transform: rotate(-2deg); }
+  .v8 .poem {
+    font-family: 'Ma Shan Zheng', 'Long Cang', cursive;
+    color: #1a1a1a;
+    font-size: 22px; line-height: 32px;
+  }
+  .v8 .tail { font-family: 'Long Cang', cursive; font-size: 16px; color: #1f3a6b; }
+  .v8 .date { font-family: 'Long Cang', cursive; color: #1f3a6b; opacity: .6; font-size: 13px; }
+  .v8 .tape {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    width: 90px; height: 22px;
+    background: linear-gradient(90deg, rgba(255,210,90,.85), rgba(255,225,140,.75));
+    border-left: 1px dashed rgba(0,0,0,.1); border-right: 1px dashed rgba(0,0,0,.1);
+  }
+
+  /* ============================================================
+     V9 · 日式素朴（Muji 灰米线）
+     ============================================================ */
+  .v9 .screen { background: #ebe6dc; color: #2e2e2e; }
+  .v9 .brand { font-weight: 300; letter-spacing: 0.5em; color: #6a6a6a; font-size: 12px; }
+  .v9 .sub { font-weight: 300; letter-spacing: 0.3em; color: #9a9a9a; }
+  .v9 .body { gap: 22px; }
+  .v9 .emoji { font-size: 64px; opacity: .9; }
+  .v9 .chips { font-size: 11px; letter-spacing: 0.2em; }
+  .v9 .chip {
+    border: 1px solid #9a948a; color: #4a4a4a;
+    background: transparent;
+    border-radius: 0;
+    padding: 3px 12px;
+    font-weight: 300;
+  }
+  .v9 .poem {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 400; color: #1a1a1a;
+    font-size: 17px; line-height: 2.4; letter-spacing: 0.2em;
+  }
+  .v9 .tail { color: #5a5a5a; font-weight: 300; }
+  .v9 .tail .k { color: #9a948a; }
+  .v9 .date { color: #9a948a; font-weight: 300; }
+  .v9 .divider {
+    width: 24px; height: 1px; background: #9a948a;
+    margin: 4px auto;
+  }
+
+  /* ============================================================
+     V10 · 杂志封面（高对比 / 大字 / 拼贴）
+     ============================================================ */
+  .v10 .screen { background: #f7f3ec; color: #0a0a0a; padding: 0; overflow: hidden; }
+  .v10 .top-block {
+    background: #d84329;
+    color: #fff7e6;
+    padding: 18px 22px 56px;
+    position: relative;
+  }
+  .v10 .top-block::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 24px;
+    background: linear-gradient(180deg, transparent, #f7f3ec);
+  }
+  .v10 .issue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em; opacity: .8;
+    display: flex; justify-content: space-between;
+  }
+  .v10 .v10-title {
+    font-family: 'ZCOOL QingKe HuangYou', 'Noto Serif SC', serif;
+    font-size: 56px; font-weight: 900;
+    line-height: 0.95; letter-spacing: -0.02em;
+    margin-top: 14px;
+  }
+  .v10 .v10-en { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.4em; margin-top: 8px; opacity: .85; }
+  .v10 .v10-hero {
+    position: absolute; right: 14px; bottom: -10px;
+    font-size: 92px; line-height: 1; z-index: 2;
+    filter: drop-shadow(0 6px 0 rgba(0,0,0,.18));
+  }
+  .v10 .v10-content { padding: 36px 22px 18px; flex: 1; display: flex; flex-direction: column; gap: 18px; }
+  .v10 .v10-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+  .v10 .chip {
+    border: 1.5px solid #0a0a0a; color: #0a0a0a;
+    border-radius: 0; padding: 2px 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.15em; font-weight: 700;
+  }
+  .v10 .poem {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    text-align: left; color: #0a0a0a;
+    font-size: 18px; line-height: 1.9; letter-spacing: 0.12em;
+  }
+  .v10 .tail {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    border-top: 1.5px solid #0a0a0a; padding-top: 10px;
+    color: #0a0a0a;
+  }
+  .v10 .date {
+    font-family: 'JetBrains Mono', monospace; padding: 0 22px 14px;
+    color: #555; letter-spacing: 0.3em;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>签出 · 主页设计选型</h1>
+  <p>10 个手机预览，同一首签的内容。挑你喜欢的告诉我编号即可。</p>
+</div>
+
+<div class="grid">
+
+  <!-- V1 -->
+  <div class="card">
+    <div class="label"><span class="n">01</span><span class="name">现状 · 暖米色当代禅</span><span class="desc">现在线上的</span></div>
+    <div class="phone v1">
+      <div class="screen">
+        <div class="brand">签出 · Omenji</div>
+        <div class="sub">摇一摇，掉出今天的签</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">2026-05-19 · 一天一签</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 -->
+  <div class="card">
+    <div class="label"><span class="n">02</span><span class="name">传统寺庙签 · 朱红朱黄</span><span class="desc">楷书、朱印、最直觉的"求签"感</span></div>
+    <div class="phone v2">
+      <div class="screen">
+        <div class="brand">签 出</div>
+        <div class="sub">摇 一 摇 · 今 日 一 签</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 一 签</span>
+            <span class="chip">中 签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语 闻茶香</div>
+            <div><span class="k">忌</span>深谈 立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="stamp">籤</div>
+        <div class="date">丙午 · 五月十九</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V3 -->
+  <div class="card">
+    <div class="label"><span class="n">03</span><span class="name">暗夜禅 · 月光烟雾</span><span class="desc">深蓝紫黑、emoji 发光，仪式感顶配</span></div>
+    <div class="phone v3">
+      <div class="screen">
+        <div class="stars"></div>
+        <div class="brand">签出 · OMENJI</div>
+        <div class="sub">夜 来 摇 签</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">2026 · 05 · 19</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V4 -->
+  <div class="card">
+    <div class="label"><span class="n">04</span><span class="name">古籍竖排 · 米黄宣纸</span><span class="desc">诗文从右到左竖排，朱印章在角</span></div>
+    <div class="phone v4">
+      <div class="screen">
+        <div class="seal">籤</div>
+        <div class="brand">签 出</div>
+        <div class="sub">Omenji · 一 日 一 签</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第一籤</span>
+            <span class="chip">中籤</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语 闻茶香</div>
+            <div><span class="k">忌</span>深谈 立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">丙午年 五月十九</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V5 -->
+  <div class="card">
+    <div class="label"><span class="n">05</span><span class="name">极简白底 · 苹果风</span><span class="desc">超大留白，最克制，最现代</span></div>
+    <div class="phone v5">
+      <div class="screen">
+        <div class="brand">签出 · Omenji</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">2026 / 05 / 19</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V6 -->
+  <div class="card">
+    <div class="label"><span class="n">06</span><span class="name">水墨山水 · 宣纸远山</span><span class="desc">底部水墨远山轮廓，最有中国味</span></div>
+    <div class="phone v6">
+      <div class="screen">
+        <div class="brand">签出 · 一日一签</div>
+        <div class="sub">Omenji</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="mountains"></div>
+        <div class="date">2026-05-19</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V7 -->
+  <div class="card">
+    <div class="label"><span class="n">07</span><span class="name">赛博终端 · 磷绿黑底</span><span class="desc">「签出 = git checkout」赛博梗到底</span></div>
+    <div class="phone v7">
+      <div class="screen">
+        <div class="brand">omenji draw --today</div>
+        <div class="sub">// 2026-05-19 · seed=1a3f...</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">SIGN_01</span>
+            <span class="chip">LV_MID</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">DO</span>不语 闻茶香</div>
+            <div><span class="k">!DO</span>深谈 立 flag</div>
+            <div><span class="k">DIR</span>向晚</div>
+            <div><span class="k">NUM</span>七</div>
+          </div>
+        </div>
+        <div class="date">$ _ <span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V8 -->
+  <div class="card">
+    <div class="label"><span class="n">08</span><span class="name">手账纸张 · 横线本胶带</span><span class="desc">手写体 + 黄色胶带，亲切年轻</span></div>
+    <div class="phone v8">
+      <div class="screen">
+        <div class="tape"></div>
+        <div class="brand">签出 · 今日</div>
+        <div class="sub">5/19 雨 · 今天的签</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语 闻茶香</div>
+            <div><span class="k">忌</span>深谈 立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">2026/5/19 周二</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V9 -->
+  <div class="card">
+    <div class="label"><span class="n">09</span><span class="name">日式素朴 · 无印良品</span><span class="desc">米灰、细线、最少色，安静</span></div>
+    <div class="phone v9">
+      <div class="screen">
+        <div class="brand">OMENJI</div>
+        <div class="sub">签 出 · 一 日 一 签</div>
+        <div class="divider"></div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="date">2026 — 05 — 19</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V10 -->
+  <div class="card">
+    <div class="label"><span class="n">10</span><span class="name">杂志封面 · 高对比拼贴</span><span class="desc">「ISSUE 01」复古杂志感，最有传播力</span></div>
+    <div class="phone v10">
+      <div class="screen">
+        <div class="top-block">
+          <div class="issue"><span>ISSUE №001</span><span>2026.05.19</span></div>
+          <div class="v10-title">签出</div>
+          <div class="v10-en">OMENJI · DAILY ORACLE</div>
+          <div class="v10-hero">🌙</div>
+        </div>
+        <div class="v10-content">
+          <div class="v10-meta">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="poem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">A DAILY ZINE OF SMALL FATES</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
