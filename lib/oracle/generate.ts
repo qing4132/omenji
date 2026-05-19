@@ -23,9 +23,10 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
 
   let poem;
   if (rarity === 'meta') {
-    poem = POEMS.find((p) => p.id === 30) ?? POEMS[POEMS.length - 1];
+    // 元签：id 0，固定「此签无字亦无言」
+    poem = POEMS.find((p) => p.id === 0) ?? POEMS[POEMS.length - 1];
   } else {
-    const pool = POEMS.filter((p) => p.id !== 30);
+    const pool = POEMS.filter((p) => p.id !== 0);
     poem = pool[Math.floor(rng() * pool.length)];
   }
 

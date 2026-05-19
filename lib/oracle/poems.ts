@@ -265,7 +265,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['夜行', '远行', '深谈'],
   },
   {
-    id: 30,
+    id: 0,
     lines: ['此签无字亦无言', '无字之处即是言', '莫问签中真意是', '问者本身已是签'],
     emoji: '🕳️',
     theme: '元签',
@@ -274,7 +274,7 @@ export const POEMS: readonly Poem[] = [
     dont: [],
   },
   {
-    id: 31,
+    id: 30,
     lines: ['风起萍生千里船', '扬帆便是好时年', '莫问归期何处是', '今日且乘东南风'],
     emoji: '⛴️',
     theme: '扬帆',
@@ -283,7 +283,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['迟疑', '回头', '揣测', '拖延'],
   },
   {
-    id: 32,
+    id: 31,
     lines: ['街口偶遇旧时人', '一笑相逢不必询', '各有各的浮沉事', '各有各的归家心'],
     emoji: '🚶',
     theme: '旧友偶遇',
@@ -292,7 +292,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['深谈', '追问', '挽留', '客套'],
   },
   {
-    id: 33,
+    id: 32,
     lines: ['鸡声茅店月斜西', '行客已在山路低', '莫嫌前途多风雪', '风雪之外是春溪'],
     emoji: '❄️',
     theme: '行路终见春',
@@ -301,7 +301,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['抱怨', '回头', '迟疑', '揣测'],
   },
   {
-    id: 34,
+    id: 33,
     lines: ['小炉新火煮新茶', '隔窗听雨打芭蕉', '此时此处是吾乡', '不必远问天涯遥'],
     emoji: '🫖',
     theme: '此处即家',
@@ -310,7 +310,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['远行', '揣测', '强求', '攀附'],
   },
   {
-    id: 35,
+    id: 34,
     lines: ['一夜东风过竹门', '满院红梅落无痕', '美好之事不久长', '短暂也是真乾坤'],
     emoji: '🌬️',
     theme: '美而短',
@@ -319,7 +319,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['挽留', '复盘', '强求', '翻旧账'],
   },
   {
-    id: 36,
+    id: 35,
     lines: ['山中无历日不知', '抬头一片白云时', '云无心兮鸟自飞', '何须计较来与归'],
     emoji: '🏔️',
     theme: '不计较',
@@ -328,7 +328,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['计较', '揣测', '复盘', '追问'],
   },
   {
-    id: 37,
+    id: 36,
     lines: ['秋风未起叶先黄', '心事未说人已忙', '你之所欲非他欲', '何苦勉强作他想'],
     emoji: '🍃',
     theme: '不勉强',
@@ -337,7 +337,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['强求', '挽留', '揣测', '替人决断'],
   },
   {
-    id: 38,
+    id: 37,
     lines: ['老街深处小馄饨', '一碗热汤抵千金', '平凡之中有真味', '神仙也羡此俗心'],
     emoji: '🍜',
     theme: '平凡为乐',
@@ -346,7 +346,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['减肥', '计较', '揣测', '攀附'],
   },
   {
-    id: 39,
+    id: 38,
     lines: ['古道西风瘦马行', '断桥流水夕阳横', '此情此景似曾识', '似识非识便是生'],
     emoji: '🐴',
     theme: '似曾相识',
@@ -355,7 +355,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['揣测', '强求', '复盘', '追问'],
   },
   {
-    id: 40,
+    id: 39,
     lines: ['深井之底见天光', '一线之中有阴阳', '困处自有解困道', '莫向井外问青苍'],
     emoji: '🪨',
     theme: '困处自解',
@@ -364,7 +364,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['求解', '揣测', '抱怨', '求人'],
   },
   {
-    id: 41,
+    id: 40,
     lines: ['一线生机藏暗处', '不见之处自分明', '莫嫌前路无灯火', '走过自有月华明'],
     emoji: '🌌',
     theme: '暗中有路',
@@ -373,7 +373,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['迟疑', '回头', '抱怨', '拖延'],
   },
   {
-    id: 42,
+    id: 41,
     lines: ['三餐两觉一杯茶', '半日清闲胜万家', '莫道平淡无滋味', '平淡之中有桃花'],
     emoji: '🍑',
     theme: '平淡是真',
@@ -382,7 +382,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['远行', '强求', '计较', '应酬'],
   },
   {
-    id: 43,
+    id: 42,
     lines: ['风雨之中行船难', '浪打船头不可看', '此时宜泊不宜进', '进时反落浪心间'],
     emoji: '🌊',
     theme: '风雨宜泊',
@@ -391,7 +391,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['远行', '抢答', '立誓', '急行'],
   },
   {
-    id: 44,
+    id: 43,
     lines: ['灯下月下两相思', '一是真来一是痴', '真痴皆是心中事', '心若放下无所知'],
     emoji: '💭',
     theme: '相思放下',
@@ -400,7 +400,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['挽留', '翻旧账', '揣测', '探听'],
   },
   {
-    id: 45,
+    id: 44,
     lines: ['三月烟柳过桥东', '桥东桥西皆春风', '何须问我归何处', '春风之处皆是宫'],
     emoji: '🌳',
     theme: '春风浩荡',
@@ -409,7 +409,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['揣测', '强求', '抱怨', '拖延'],
   },
   {
-    id: 46,
+    id: 45,
     lines: ['朱门半启庭犬吠', '一只野鹤入云回', '富贵闲云两不识', '自有自来自归位'],
     emoji: '🕊️',
     theme: '各得其所',
@@ -418,7 +418,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['攀附', '揣测', '计较', '应酬'],
   },
   {
-    id: 47,
+    id: 46,
     lines: ['暮春庭院落英多', '一片云来又复过', '来去之间一念间', '一念之外是松萝'],
     emoji: '🌼',
     theme: '来去无碍',
@@ -427,7 +427,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['挽留', '揣测', '强求', '翻旧账'],
   },
   {
-    id: 48,
+    id: 47,
     lines: ['推杯换盏夜未休', '满座宾朋皆白头', '此乐何曾减分毫', '减的是夜与春秋'],
     emoji: '🥂',
     theme: '知己共饮',
@@ -436,7 +436,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['早归', '推辞', '客套', '揣测'],
   },
   {
-    id: 49,
+    id: 48,
     lines: ['一念之差千里偏', '此时悬崖一线天', '急中宜静莫宜动', '动时反落悬崖边'],
     emoji: '⚠️',
     theme: '危机戒动',
@@ -445,7 +445,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['抢答', '立誓', '远行', '急行'],
   },
   {
-    id: 50,
+    id: 49,
     lines: ['桃符已换岁星新', '旧债新欢一并陈', '莫问来年是何样', '来年也只是来人'],
     emoji: '🧧',
     theme: '新年随性',
@@ -454,7 +454,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['立誓', '复盘', '揣测', '翻旧账'],
   },
   {
-    id: 51,
+    id: 50,
     lines: ['钓竿一握江湖远', '鱼来鱼去不在心', '钓的并非鱼一尾', '钓的是这一寸阴'],
     emoji: '🎣',
     theme: '闲钓修心',
@@ -463,7 +463,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['强求', '揣测', '计较', '急行'],
   },
   {
-    id: 52,
+    id: 51,
     lines: ['大雪封山三尺深', '围炉煮酒待故人', '故人未至雪先到', '雪亦是故来访身'],
     emoji: '🔥',
     theme: '雪中待人',
@@ -472,7 +472,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['出门', '揣测', '强求', '催促'],
   },
   {
-    id: 53,
+    id: 52,
     lines: ['一笔一画写春风', '风过纸上墨未浓', '不必工巧不必妙', '心到处时即是工'],
     emoji: '🖌️',
     theme: '心到为工',
@@ -481,7 +481,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['求工', '揣测', '计较', '张扬'],
   },
   {
-    id: 54,
+    id: 53,
     lines: ['鸦栖古木夕阳低', '行人不语马蹄迟', '此景古时似今日', '古今相照月一弯'],
     emoji: '🕰️',
     theme: '古今相照',
@@ -490,7 +490,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['揣测', '复盘', '抱怨', '追问'],
   },
   {
-    id: 55,
+    id: 54,
     lines: ['鱼相忘乎江湖中', '人相忘乎悲喜中', '莫怪故人不来访', '相忘也是一相逢'],
     emoji: '🐠',
     theme: '相忘',
@@ -499,7 +499,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['挽留', '复盘', '翻旧账', '探听'],
   },
   {
-    id: 56,
+    id: 55,
     lines: ['风雨欲来天先黄', '莫怪世人觉风凉', '兆头已显事未来', '此时关窗收衣裳'],
     emoji: '🪟',
     theme: '预警宜收',
@@ -508,7 +508,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['远行', '立誓', '抢答', '拖延'],
   },
   {
-    id: 57,
+    id: 56,
     lines: ['一池春水皱无端', '莫问东风何处来', '心若有动皆是因', '心若无动皆是闲'],
     emoji: '💧',
     theme: '因心而起',
@@ -517,7 +517,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['揣测', '动怒', '抢答', '急行'],
   },
   {
-    id: 58,
+    id: 57,
     lines: ['一夜春雷震群山', '山未动而梦先翻', '大事将至先有兆', '此时宜静莫宜言'],
     emoji: '⚡',
     theme: '大事将至',
@@ -526,7 +526,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['立誓', '抢答', '揣测', '张扬'],
   },
   {
-    id: 59,
+    id: 58,
     lines: ['一砚清水写无题', '写到深处自成诗', '不问来处不问去', '此中真意只自知'],
     emoji: '🖋️',
     theme: '自知',
@@ -535,7 +535,7 @@ export const POEMS: readonly Poem[] = [
     dont: ['求解', '揣测', '复盘', '张扬'],
   },
   {
-    id: 60,
+    id: 59,
     lines: ['旧友忽来叩柴门', '一坐便是半黄昏', '不必煮酒不必茶', '寒暄两句已是春'],
     emoji: '🚪',
     theme: '老友叩门',
