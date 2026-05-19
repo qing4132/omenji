@@ -46,8 +46,8 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
     return result;
   }
 
-  // 签号：必显示
-  result.number = String(1 + Math.floor(rng() * 100));
+  // 签号 = 诗在签谱里的固定编号（与诗绑定，不随机）
+  result.number = String(poem.id);
 
   // 吉凶等级 = 诗本身决定的核心信息，必显示
   result.level = poem.level;

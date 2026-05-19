@@ -5,7 +5,7 @@ import { generate, buildSeed } from '@/lib/oracle/generate';
 import type { OracleResult } from '@/lib/oracle/types';
 
 const FP_KEY = 'omenji.fp';
-const DAILY_KEY = 'omenji.daily.v2';
+const DAILY_KEY = 'omenji.daily.v3';
 const REROLL_KEY = 'omenji.reroll';
 
 function getOrCreateFingerprint(): string {
