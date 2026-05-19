@@ -400,6 +400,182 @@
     color: #555; letter-spacing: 0.3em;
     text-align: left;
   }
+
+  /* ============================================================
+     竖排通用样式 · 用于 V11–V15
+     ============================================================ */
+  .vstack .body { justify-content: center; gap: 14px; padding-top: 6px; }
+  .vstack .vpoem {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 19px;
+    line-height: 1.7;
+    letter-spacing: 0.22em;
+    height: 240px;
+  }
+  .vstack .vpoem > div {
+    display: inline-block;
+    margin-left: 16px;
+    white-space: normal;
+  }
+  .vstack .vpoem > div:first-child { margin-left: 0; }
+
+  /* ============================================================
+     V11 · 竖排 · 极简白底
+     ============================================================ */
+  .v11 .screen { background: #ffffff; color: #0a0a0a; }
+  .v11 .brand { font-weight: 300; letter-spacing: 0.5em; font-size: 11px; color: #999; }
+  .v11 .sub { display: none; }
+  .v11 .emoji { font-size: 48px; }
+  .v11 .chips { font-size: 10px; letter-spacing: 0.2em; opacity: .55; }
+  .v11 .chip { border: none; padding: 0; }
+  .v11 .chip + .chip::before { content: '·'; margin: 0 8px; }
+  .v11 .vpoem { color: #0a0a0a; font-weight: 400; }
+  .v11 .tail { font-size: 11px; opacity: .55; letter-spacing: 0.15em; margin-top: 12px; }
+  .v11 .date { letter-spacing: 0.4em; opacity: .35; }
+  .v11 .rule {
+    width: 1px; height: 28px; background: #0a0a0a; opacity: .25; margin: 0 auto;
+  }
+
+  /* ============================================================
+     V12 · 竖排 · 黑底烫金（极仪式感）
+     ============================================================ */
+  .v12 .screen {
+    background:
+      radial-gradient(120% 80% at 50% 0%, #1a1410 0%, #0a0806 100%);
+    color: #d4a96b;
+  }
+  .v12 .brand {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    color: #d4a96b; letter-spacing: 0.4em;
+  }
+  .v12 .sub { color: #b58a4d; letter-spacing: 0.3em; }
+  .v12 .emoji { font-size: 50px; filter: drop-shadow(0 0 16px rgba(212,169,107,.45)); }
+  .v12 .chips { font-size: 11px; }
+  .v12 .chip {
+    border-color: #d4a96b55; color: #d4a96b;
+    background: transparent;
+  }
+  .v12 .vpoem {
+    color: #e8c886;
+    text-shadow: 0 0 12px rgba(212,169,107,.25);
+    font-weight: 600;
+  }
+  .v12 .tail { color: #b58a4d; font-family: 'Noto Serif SC', serif; }
+  .v12 .tail .k { color: #d4a96b; opacity: .6; }
+  .v12 .date { color: #8a6a3a; letter-spacing: 0.4em; }
+  .v12 .gold-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, #d4a96b, transparent);
+    margin: 6px auto;
+  }
+
+  /* ============================================================
+     V13 · 竖排 · 水墨远山（卷轴感）
+     ============================================================ */
+  .v13 .screen {
+    background:
+      radial-gradient(ellipse at 50% 10%, rgba(50,40,30,.08) 0%, transparent 50%),
+      #f5efe0;
+    color: #0a0a0a;
+    overflow: hidden;
+    position: relative;
+  }
+  .v13 .brand { font-family: 'Noto Serif SC', serif; font-weight: 600; color: #1a1a1a; }
+  .v13 .sub { font-family: 'Noto Serif SC', serif; color: #1a1a1a; opacity: .55; }
+  .v13 .emoji { font-size: 46px; }
+  .v13 .chip { border-color: #1a1a1a55; color: #1a1a1a; background: rgba(255,255,255,.3); }
+  .v13 .vpoem { color: #0a0a0a; font-weight: 600; }
+  .v13 .tail { font-family: 'Noto Serif SC', serif; color: #2a2a2a; position: relative; z-index: 2; }
+  .v13 .mountains {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 120px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 120' preserveAspectRatio='none'><path d='M0 90 L40 60 L80 80 L120 35 L160 65 L210 25 L260 55 L300 40 L360 75 L360 120 L0 120 Z' fill='%231a1a1a' opacity='.15'/><path d='M0 105 L60 80 L110 90 L170 65 L230 85 L290 70 L360 95 L360 120 L0 120 Z' fill='%231a1a1a' opacity='.28'/></svg>") center bottom / 100% 100% no-repeat;
+    pointer-events: none;
+  }
+  .v13 .date { color: #1a1a1a; opacity: .5; position: relative; z-index: 2; }
+
+  /* ============================================================
+     V14 · 竖排 · 朱红木牌（像一块签牌）
+     ============================================================ */
+  .v14 .screen {
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 8%, transparent 92%, rgba(0,0,0,.22) 100%),
+      repeating-linear-gradient(180deg, #b1281e 0 4px, #a82215 4px 5px),
+      #b1281e;
+    color: #fdf3c4;
+    padding: 36px 22px 22px;
+  }
+  .v14 .brand {
+    font-family: 'ZCOOL XiaoWei', serif; font-weight: 700;
+    color: #fdf3c4; letter-spacing: 0.3em;
+  }
+  .v14 .sub { color: #fdf3c4; opacity: .75; }
+  .v14 .emoji {
+    width: 72px; height: 72px;
+    background: #fdf3c4; color: #b1281e;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: 0 0 0 3px rgba(253,243,196,.4), 0 4px 0 rgba(0,0,0,.2);
+    font-size: 40px;
+  }
+  .v14 .chip {
+    border-color: #fdf3c4; color: #fdf3c4;
+    background: rgba(0,0,0,.15);
+    font-family: 'ZCOOL XiaoWei', serif;
+  }
+  .v14 .vpoem {
+    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+    color: #fdf3c4;
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+  }
+  .v14 .tail {
+    font-family: 'ZCOOL XiaoWei', serif;
+    color: #fdf3c4;
+    border-top: 1px solid rgba(253,243,196,.35);
+    padding-top: 8px;
+  }
+  .v14 .tail .k { opacity: .65; }
+  .v14 .date { color: #fdf3c4; opacity: .65; letter-spacing: 0.3em; }
+  .v14 .corner {
+    position: absolute; top: 14px; right: 14px;
+    width: 12px; height: 12px;
+    border-top: 2px solid #fdf3c4; border-right: 2px solid #fdf3c4;
+    opacity: .5;
+  }
+  .v14 .corner.bl {
+    top: auto; bottom: 14px; right: auto; left: 14px;
+    border-top: none; border-right: none;
+    border-bottom: 2px solid #fdf3c4; border-left: 2px solid #fdf3c4;
+  }
+
+  /* ============================================================
+     V15 · 竖排 · 米色衬线（v4 的克制版，无朱印章）
+     ============================================================ */
+  .v15 .screen {
+    background: #f0e6d2;
+    color: #2a1a0a;
+    padding: 28px 18px;
+  }
+  .v15 .brand {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    color: #4a2a18; letter-spacing: 0.4em;
+  }
+  .v15 .sub { color: #4a2a18; opacity: .55; letter-spacing: 0.25em; }
+  .v15 .emoji { font-size: 44px; }
+  .v15 .chip { border-color: #4a2a1855; color: #4a2a18; background: transparent; }
+  .v15 .vpoem {
+    font-family: 'Noto Serif SC', serif; font-weight: 500;
+    color: #1a0a04;
+  }
+  .v15 .tail {
+    font-family: 'Noto Serif SC', serif;
+    color: #4a1a10; opacity: .85;
+    border-top: 1px solid #4a2a1830; padding-top: 10px;
+  }
+  .v15 .date { font-family: 'Noto Serif SC', serif; color: #4a2a18; opacity: .55; }
 </style>
 </head>
 <body>
@@ -726,6 +902,166 @@
           </div>
         </div>
         <div class="date">A DAILY ZINE OF SMALL FATES</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V11 · 竖排白底 -->
+  <div class="card">
+    <div class="label"><span class="n">11</span><span class="name">竖排 · 极简白底</span><span class="desc">纯白 + 黑字竖排，最克制的古意</span></div>
+    <div class="phone v11 vstack">
+      <div class="screen">
+        <div class="brand">签出 · OMENJI</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="vpoem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="rule"></div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">2026 / 05 / 19</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V12 · 竖排黑底烫金 -->
+  <div class="card">
+    <div class="label"><span class="n">12</span><span class="name">竖排 · 黑底烫金</span><span class="desc">深黑 + 暖金字，极仪式感，像古庙夜签</span></div>
+    <div class="phone v12 vstack">
+      <div class="screen">
+        <div class="brand">签 出</div>
+        <div class="sub">OMENJI · 夜 签</div>
+        <div class="gold-divider"></div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 一 签</span>
+            <span class="chip">中 签</span>
+          </div>
+          <div class="vpoem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="gold-divider"></div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语 闻茶香</div>
+            <div><span class="k">忌</span>深谈 立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">丙午 · 五月十九</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V13 · 竖排水墨远山 -->
+  <div class="card">
+    <div class="label"><span class="n">13</span><span class="name">竖排 · 水墨远山</span><span class="desc">米色宣纸 + 远山轮廓，竖排诗悬于山上</span></div>
+    <div class="phone v13 vstack">
+      <div class="screen">
+        <div class="brand">签出 · 一日一签</div>
+        <div class="sub">Omenji</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="vpoem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="mountains"></div>
+        <div class="date">2026-05-19</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V14 · 竖排朱红木牌 -->
+  <div class="card">
+    <div class="label"><span class="n">14</span><span class="name">竖排 · 朱红木牌</span><span class="desc">朱红木纹 + 米黄字，像庙门口挂的签牌</span></div>
+    <div class="phone v14 vstack">
+      <div class="screen">
+        <div class="corner"></div>
+        <div class="corner bl"></div>
+        <div class="brand">签 出</div>
+        <div class="sub">OMENJI · 今 日 一 签</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 一 签</span>
+            <span class="chip">中 签</span>
+          </div>
+          <div class="vpoem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语 闻茶香</div>
+            <div><span class="k">忌</span>深谈 立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">丙午 五月十九</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V15 · 竖排米色衬线 -->
+  <div class="card">
+    <div class="label"><span class="n">15</span><span class="name">竖排 · 米色衬线</span><span class="desc">v04 的克制版，无朱印无杂物，纯诗</span></div>
+    <div class="phone v15 vstack">
+      <div class="screen">
+        <div class="brand">签 出</div>
+        <div class="sub">OMENJI · 一 日 一 签</div>
+        <div class="body">
+          <div class="emoji">🌙</div>
+          <div class="chips">
+            <span class="chip">第 1 签</span>
+            <span class="chip">中签</span>
+          </div>
+          <div class="vpoem">
+            <div>雨打芭蕉夜未央</div>
+            <div>孤灯一盏照空堂</div>
+            <div>心中有事不需说</div>
+            <div>问月月也不知详</div>
+          </div>
+          <div class="tail">
+            <div><span class="k">宜</span>不语、闻茶香</div>
+            <div><span class="k">忌</span>深谈、立 flag</div>
+            <div><span class="k">方位</span>向晚</div>
+            <div><span class="k">数</span>七</div>
+          </div>
+        </div>
+        <div class="date">2026 — 05 — 19</div>
       </div>
     </div>
   </div>
