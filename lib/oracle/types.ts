@@ -7,7 +7,8 @@ export type PRNG = () => number;
 export type Poem = {
   id: number;
   lines: [string, string, string, string];
-  emojis: readonly string[];
+  /** 这首诗专属的 emoji，全谱唯一，是签的一部分 */
+  emoji: string;
   theme?: string;
   /** 与诗意匹配的吉凶等级 */
   level: Level;

@@ -1,12 +1,12 @@
 import type { Poem } from './types';
 
-// 手写七言绝句签谱。每首 4 行 × 7 字，并自带匹配的 level + 宜/忌候选。
-// emoji、level、宜、忌 都是诗本身决定的，不再全局乱配。
+// 手写七言绝句签谱。每首 4 行 × 7 字。
+// emoji 与诗 1:1 绑定，全谱唯一；emoji 即是这支签的一部分。
 export const POEMS: readonly Poem[] = [
   {
     id: 1,
     lines: ['雨打芭蕉夜未央', '孤灯一盏照空堂', '心中有事不需说', '问月月也不知详'],
-    emojis: ['🌙', '🕯️', '☂️'],
+    emoji: '🌙',
     theme: '心事难言',
     level: '中',
     do: ['不语', '独坐', '看月'],
@@ -15,7 +15,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 2,
     lines: ['旧伞折角立檐边', '路人匆匆不抬眼', '今日宜静不宜行', '明日之事明日言'],
-    emojis: ['☂️', '🚪', '🌧️'],
+    emoji: '☂️',
     theme: '宜静',
     level: '中',
     do: ['静坐', '收伞', '慢行'],
@@ -24,7 +24,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 3,
     lines: ['一壶清茶半盏凉', '浮沉皆是少年狂', '莫问前程归何处', '茶凉再续亦无妨'],
-    emojis: ['🍵', '🌿', '🪷'],
+    emoji: '🍵',
     theme: '释然',
     level: '上',
     do: ['煮茶', '放下', '慢行'],
@@ -33,7 +33,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 4,
     lines: ['山外有山云外云', '一念起时万念奔', '若得片刻心头静', '便是人间清欢深'],
-    emojis: ['⛰️', '☁️', '🌫️'],
+    emoji: '⛰️',
     theme: '静心',
     level: '上',
     do: ['静坐', '焚香', '不语'],
@@ -42,7 +42,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 5,
     lines: ['鲤鱼跃过浅水滩', '回头方知风浪宽', '来路已远归路远', '不如就此卧云端'],
-    emojis: ['🐟', '🌊', '☁️'],
+    emoji: '🐟',
     theme: '险过宜歇',
     level: '中',
     do: ['放下', '静坐', '不问'],
@@ -51,7 +51,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 6,
     lines: ['深巷一灯照短墙', '墙根有猫不知霜', '世间冷暖各自知', '何须借问短与长'],
-    emojis: ['🐈', '🏮', '🌙'],
+    emoji: '🐈',
     theme: '自洽',
     level: '上',
     do: ['独行', '不语', '不答'],
@@ -60,7 +60,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 7,
     lines: ['蝉鸣初歇月将沉', '便利店灯比月明', '世人皆睡你独醒', '醒亦无言睡亦惊'],
-    emojis: ['🌙', '🍙', '🪫'],
+    emoji: '🍙',
     theme: '失眠',
     level: '下',
     do: ['早睡', '关灯', '不语'],
@@ -69,7 +69,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 8,
     lines: ['风过竹林声渐稀', '林中无人独坐时', '问竹竹无语相对', '此中真意已成痴'],
-    emojis: ['🎋', '🍃', '🪷'],
+    emoji: '🎋',
     theme: '独悟',
     level: '上',
     do: ['静坐', '独行', '不语'],
@@ -78,7 +78,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 9,
     lines: ['一念放下千念轻', '半推半就半生平', '莫道前路无知己', '回头亦是旧风声'],
-    emojis: ['🍂', '🪶', '🌬️'],
+    emoji: '🍂',
     theme: '释怀',
     level: '上',
     do: ['放下', '回家', '慢行'],
@@ -87,7 +87,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 10,
     lines: ['旧梦如烟随风散', '新梦未来心未安', '且把今宵当来日', '明朝再问明朝难'],
-    emojis: ['🌫️', '🕯️', '🌙'],
+    emoji: '🌫️',
     theme: '今宵',
     level: '中',
     do: ['早睡', '不问', '静坐'],
@@ -96,7 +96,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 11,
     lines: ['渡口无船舟自横', '岸边有客欲行行', '船来不必急上去', '船去也无须心惊'],
-    emojis: ['⛵', '🌊', '🪷'],
+    emoji: '⛵',
     theme: '顺其自然',
     level: '上',
     do: ['慢行', '静坐', '不问'],
@@ -105,7 +105,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 12,
     lines: ['半盏浊酒半盏空', '半句真话半句风', '世事若问真与假', '且看杯中倒影中'],
-    emojis: ['🍶', '🌬️', '🍵'],
+    emoji: '🍶',
     theme: '真假',
     level: '中',
     do: ['不答', '不语', '独酌'],
@@ -114,7 +114,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 13,
     lines: ['一封旧信压箱底', '未寄之言已成谜', '今日翻出再细看', '字迹依旧人已离'],
-    emojis: ['✉️', '📮', '🕯️'],
+    emoji: '✉️',
     theme: '旧情',
     level: '下',
     do: ['放下', '焚香', '不语'],
@@ -123,7 +123,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 14,
     lines: ['庭前梅落雪初晴', '檐下燕子又呢喃', '一年又是一年事', '旧事新事皆从前'],
-    emojis: ['🌸', '🐦', '❄️'],
+    emoji: '🌸',
     theme: '时序',
     level: '中',
     do: ['看云', '慢行', '远眺'],
@@ -132,7 +132,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 15,
     lines: ['卦象不明心自明', '签筒摇罢笑无声', '世间万事皆有数', '数不尽处是人情'],
-    emojis: ['🎋', '☯️', '🪙'],
+    emoji: '☯️',
     theme: '自指',
     level: '上',
     do: ['不问', '静坐', '抄经'],
@@ -141,7 +141,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 16,
     lines: ['急雨敲窗夜不眠', '残灯照影意阑珊', '明日之事休先问', '问得明日更心烦'],
-    emojis: ['🌧️', '🪟', '🕯️'],
+    emoji: '🌧️',
     theme: '夜雨焦虑',
     level: '下',
     do: ['早睡', '关灯', '不问'],
@@ -150,7 +150,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 17,
     lines: ['鸿雁南飞过山岭', '飞过也不回头看', '世人皆道前程远', '前程其实在脚边'],
-    emojis: ['🪶', '🏔️', '☁️'],
+    emoji: '🪶',
     theme: '当下',
     level: '上',
     do: ['慢行', '远眺', '独行'],
@@ -159,7 +159,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 18,
     lines: ['一炷清香三柱烟', '烟散方知心未闲', '心若闲来何处去', '去得太远便忘还'],
-    emojis: ['🕯️', '🌫️', '🪷'],
+    emoji: '🕯️',
     theme: '心猿',
     level: '中',
     do: ['焚香', '静坐', '回家'],
@@ -168,7 +168,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 19,
     lines: ['池中鱼影水中天', '欲问深浅无人言', '深处自有深处事', '浅处亦是浅处缘'],
-    emojis: ['🐟', '🪷', '🌊'],
+    emoji: '🪷',
     theme: '各安其位',
     level: '上',
     do: ['不问', '静坐', '看云'],
@@ -177,7 +177,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 20,
     lines: ['风停雨歇月新生', '便利店里照空瓶', '人来人往皆过客', '你也是其中一名'],
-    emojis: ['🌙', '🍙', '🫧'],
+    emoji: '🫧',
     theme: '过客',
     level: '中',
     do: ['慢行', '看云', '不语'],
@@ -186,7 +186,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 21,
     lines: ['三杯两盏淡如水', '谈笑之间不见秋', '世人皆问何时归', '归处即是此时此'],
-    emojis: ['🍵', '🍂', '🪷'],
+    emoji: '🍁',
     theme: '此时',
     level: '上',
     do: ['独酌', '慢行', '回家'],
@@ -195,7 +195,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 22,
     lines: ['一念清明万念熄', '一念混沌万事齐', '莫问此心向何处', '向晚之时心自栖'],
-    emojis: ['🌅', '🕊️', '🪷'],
+    emoji: '🌅',
     theme: '清明',
     level: '上上',
     do: ['静坐', '焚香', '向晚'],
@@ -204,7 +204,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 23,
     lines: ['长街尽头有灯笼', '灯笼之下有故人', '故人不识今时我', '我亦不识旧时身'],
-    emojis: ['🏮', '🌃', '🚶'],
+    emoji: '🏮',
     theme: '物是人非',
     level: '下',
     do: ['放下', '慢行', '不语'],
@@ -213,7 +213,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 24,
     lines: ['春风不解少年愁', '秋月也无中年泪', '世人哭笑各自忙', '月看人间已千岁'],
-    emojis: ['🌕', '🍂', '🌸'],
+    emoji: '🌕',
     theme: '旁观',
     level: '中',
     do: ['看云', '远眺', '不答'],
@@ -222,7 +222,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 25,
     lines: ['山高水远云亦远', '心宽路阔事亦宽', '今日若得三分静', '明日便有十分安'],
-    emojis: ['⛰️', '☁️', '🪷'],
+    emoji: '☁️',
     theme: '宽心',
     level: '上上',
     do: ['静坐', '远眺', '慢行'],
@@ -231,7 +231,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 26,
     lines: ['鸟鸣枝头花满枝', '花落枝头鸟亦稀', '来者去者皆过客', '独我此心还自知'],
-    emojis: ['🐦', '🌸', '🍃'],
+    emoji: '🐦',
     theme: '来去',
     level: '上',
     do: ['静坐', '独行', '不语'],
@@ -240,7 +240,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 27,
     lines: ['一字不识也心宽', '万卷读尽也心烦', '心烦心宽皆由己', '与字与卷无相干'],
-    emojis: ['📜', '🕯️', '🪶'],
+    emoji: '📜',
     theme: '心由己',
     level: '上',
     do: ['放下', '不语', '焚香'],
@@ -249,7 +249,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 28,
     lines: ['风吹纸鸢向南去', '绳断之时不忍看', '世间所有相聚事', '皆有一日要分散'],
-    emojis: ['🪁', '🪶', '🌬️'],
+    emoji: '🪁',
     theme: '离散',
     level: '下',
     do: ['放下', '不语', '收伞'],
@@ -258,7 +258,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 29,
     lines: ['江上孤舟载月行', '月不言语舟自惊', '世间最是无言处', '最是惊心动魄声'],
-    emojis: ['🌙', '⛵', '🌊'],
+    emoji: '🚣',
     theme: '寂寥',
     level: '下',
     do: ['静坐', '不语', '关灯'],
@@ -267,7 +267,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 30,
     lines: ['此签无字亦无言', '无字之处即是言', '莫问签中真意是', '问者本身已是签'],
-    emojis: ['☯️', '🎋', '🕳️'],
+    emoji: '🕳️',
     theme: '元签',
     level: '空',
     do: [],
@@ -276,7 +276,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 31,
     lines: ['风起萍生千里船', '扬帆便是好时年', '莫问归期何处是', '今日且乘东南风'],
-    emojis: ['⛵', '🌅', '🪁'],
+    emoji: '⛴️',
     theme: '扬帆',
     level: '上',
     do: ['出门', '早起', '扬帆', '远行'],
@@ -285,7 +285,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 32,
     lines: ['街口偶遇旧时人', '一笑相逢不必询', '各有各的浮沉事', '各有各的归家心'],
-    emojis: ['🚶', '🍃', '🏮'],
+    emoji: '🚶',
     theme: '旧友偶遇',
     level: '中',
     do: ['微笑', '点头', '慢行', '闲坐'],
@@ -294,7 +294,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 33,
     lines: ['鸡声茅店月斜西', '行客已在山路低', '莫嫌前途多风雪', '风雪之外是春溪'],
-    emojis: ['❄️', '🐴', '🌅'],
+    emoji: '❄️',
     theme: '行路终见春',
     level: '上',
     do: ['早起', '远行', '不语', '慢行'],
@@ -303,7 +303,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 34,
     lines: ['小炉新火煮新茶', '隔窗听雨打芭蕉', '此时此处是吾乡', '不必远问天涯遥'],
-    emojis: ['🍵', '🌧️', '🏡'],
+    emoji: '🫖',
     theme: '此处即家',
     level: '上',
     do: ['煮茶', '听雨', '回家', '闲坐'],
@@ -312,7 +312,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 35,
     lines: ['一夜东风过竹门', '满院红梅落无痕', '美好之事不久长', '短暂也是真乾坤'],
-    emojis: ['🌸', '🌬️', '🍂'],
+    emoji: '🌬️',
     theme: '美而短',
     level: '中',
     do: ['看花', '远眺', '慢行', '折枝'],
@@ -321,7 +321,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 36,
     lines: ['山中无历日不知', '抬头一片白云时', '云无心兮鸟自飞', '何须计较来与归'],
-    emojis: ['⛰️', '☁️', '🐦'],
+    emoji: '🏔️',
     theme: '不计较',
     level: '上',
     do: ['看云', '远眺', '放下', '独行'],
@@ -330,7 +330,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 37,
     lines: ['秋风未起叶先黄', '心事未说人已忙', '你之所欲非他欲', '何苦勉强作他想'],
-    emojis: ['🍂', '🍃', '🌬️'],
+    emoji: '🍃',
     theme: '不勉强',
     level: '中',
     do: ['不语', '放下', '独行', '闲坐'],
@@ -339,7 +339,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 38,
     lines: ['老街深处小馄饨', '一碗热汤抵千金', '平凡之中有真味', '神仙也羡此俗心'],
-    emojis: ['🍜', '🥟', '🏮'],
+    emoji: '🍜',
     theme: '平凡为乐',
     level: '上',
     do: ['吃面', '早睡', '慢行', '闲坐'],
@@ -348,7 +348,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 39,
     lines: ['古道西风瘦马行', '断桥流水夕阳横', '此情此景似曾识', '似识非识便是生'],
-    emojis: ['🐴', '🌅', '🍂'],
+    emoji: '🐴',
     theme: '似曾相识',
     level: '中',
     do: ['慢行', '远眺', '不语', '听风'],
@@ -357,7 +357,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 40,
     lines: ['深井之底见天光', '一线之中有阴阳', '困处自有解困道', '莫向井外问青苍'],
-    emojis: ['🕳️', '🪨', '🕯️'],
+    emoji: '🪨',
     theme: '困处自解',
     level: '中',
     do: ['静坐', '抄经', '焚香', '独坐'],
@@ -366,7 +366,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 41,
     lines: ['一线生机藏暗处', '不见之处自分明', '莫嫌前路无灯火', '走过自有月华明'],
-    emojis: ['🌙', '🕯️', '🌃'],
+    emoji: '🌌',
     theme: '暗中有路',
     level: '上',
     do: ['慢行', '早起', '远行', '独行'],
@@ -375,7 +375,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 42,
     lines: ['三餐两觉一杯茶', '半日清闲胜万家', '莫道平淡无滋味', '平淡之中有桃花'],
-    emojis: ['🍵', '🌸', '🪷'],
+    emoji: '🍑',
     theme: '平淡是真',
     level: '上上',
     do: ['煮茶', '午睡', '看花', '闲坐'],
@@ -384,7 +384,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 43,
     lines: ['风雨之中行船难', '浪打船头不可看', '此时宜泊不宜进', '进时反落浪心间'],
-    emojis: ['🌊', '⛵', '🌧️'],
+    emoji: '🌊',
     theme: '风雨宜泊',
     level: '下',
     do: ['停船', '静坐', '不语', '关窗'],
@@ -393,7 +393,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 44,
     lines: ['灯下月下两相思', '一是真来一是痴', '真痴皆是心中事', '心若放下无所知'],
-    emojis: ['🌙', '🕯️', '📮'],
+    emoji: '💭',
     theme: '相思放下',
     level: '中',
     do: ['放下', '关灯', '早睡', '焚香'],
@@ -402,7 +402,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 45,
     lines: ['三月烟柳过桥东', '桥东桥西皆春风', '何须问我归何处', '春风之处皆是宫'],
-    emojis: ['🌸', '🍃', '🌬️'],
+    emoji: '🌳',
     theme: '春风浩荡',
     level: '上上',
     do: ['远眺', '出门', '看花', '散步'],
@@ -411,7 +411,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 46,
     lines: ['朱门半启庭犬吠', '一只野鹤入云回', '富贵闲云两不识', '自有自来自归位'],
-    emojis: ['🏯', '☁️', '🕊️'],
+    emoji: '🕊️',
     theme: '各得其所',
     level: '上',
     do: ['独行', '远眺', '不语', '慢行'],
@@ -420,7 +420,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 47,
     lines: ['暮春庭院落英多', '一片云来又复过', '来去之间一念间', '一念之外是松萝'],
-    emojis: ['🌸', '☁️', '🪷'],
+    emoji: '🌼',
     theme: '来去无碍',
     level: '上',
     do: ['静坐', '看花', '慢行', '放下'],
@@ -429,7 +429,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 48,
     lines: ['推杯换盏夜未休', '满座宾朋皆白头', '此乐何曾减分毫', '减的是夜与春秋'],
-    emojis: ['🍶', '🍵', '🏮'],
+    emoji: '🥂',
     theme: '知己共饮',
     level: '上上',
     do: ['共饮', '长谈', '大笑', '留客'],
@@ -438,7 +438,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 49,
     lines: ['一念之差千里偏', '此时悬崖一线天', '急中宜静莫宜动', '动时反落悬崖边'],
-    emojis: ['⚠️', '🪨', '🌬️'],
+    emoji: '⚠️',
     theme: '危机戒动',
     level: '下下',
     do: ['静坐', '不语', '不答', '关窗'],
@@ -447,7 +447,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 50,
     lines: ['桃符已换岁星新', '旧债新欢一并陈', '莫问来年是何样', '来年也只是来人'],
-    emojis: ['🧧', '🎆', '🌅'],
+    emoji: '🧧',
     theme: '新年随性',
     level: '中',
     do: ['不问', '远眺', '慢行', '闲坐'],
@@ -456,7 +456,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 51,
     lines: ['钓竿一握江湖远', '鱼来鱼去不在心', '钓的并非鱼一尾', '钓的是这一寸阴'],
-    emojis: ['🎣', '🐟', '🌊'],
+    emoji: '🎣',
     theme: '闲钓修心',
     level: '上',
     do: ['静坐', '独行', '远眺', '抚琴'],
@@ -465,7 +465,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 52,
     lines: ['大雪封山三尺深', '围炉煮酒待故人', '故人未至雪先到', '雪亦是故来访身'],
-    emojis: ['❄️', '🍶', '🕯️'],
+    emoji: '🔥',
     theme: '雪中待人',
     level: '中',
     do: ['煮酒', '静坐', '听雪', '待客'],
@@ -474,7 +474,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 53,
     lines: ['一笔一画写春风', '风过纸上墨未浓', '不必工巧不必妙', '心到处时即是工'],
-    emojis: ['📜', '🪶', '🌸'],
+    emoji: '🖌️',
     theme: '心到为工',
     level: '上',
     do: ['抄经', '写字', '静坐', '翻书'],
@@ -483,7 +483,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 54,
     lines: ['鸦栖古木夕阳低', '行人不语马蹄迟', '此景古时似今日', '古今相照月一弯'],
-    emojis: ['🐦', '🌅', '🐴'],
+    emoji: '🕰️',
     theme: '古今相照',
     level: '中',
     do: ['远眺', '独行', '不语', '听风'],
@@ -492,7 +492,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 55,
     lines: ['鱼相忘乎江湖中', '人相忘乎悲喜中', '莫怪故人不来访', '相忘也是一相逢'],
-    emojis: ['🐟', '🌊', '🪷'],
+    emoji: '🐠',
     theme: '相忘',
     level: '上',
     do: ['放下', '不问', '慢行', '独行'],
@@ -501,7 +501,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 56,
     lines: ['风雨欲来天先黄', '莫怪世人觉风凉', '兆头已显事未来', '此时关窗收衣裳'],
-    emojis: ['🌧️', '🪟', '🌬️'],
+    emoji: '🪟',
     theme: '预警宜收',
     level: '下',
     do: ['关窗', '收伞', '早归', '收信'],
@@ -510,7 +510,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 57,
     lines: ['一池春水皱无端', '莫问东风何处来', '心若有动皆是因', '心若无动皆是闲'],
-    emojis: ['🪷', '💧', '🌬️'],
+    emoji: '💧',
     theme: '因心而起',
     level: '上',
     do: ['静坐', '焚香', '不问', '闲坐'],
@@ -519,7 +519,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 58,
     lines: ['一夜春雷震群山', '山未动而梦先翻', '大事将至先有兆', '此时宜静莫宜言'],
-    emojis: ['⚡', '🏔️', '🌧️'],
+    emoji: '⚡',
     theme: '大事将至',
     level: '中',
     do: ['静坐', '不语', '早起', '焚香'],
@@ -528,7 +528,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 59,
     lines: ['一砚清水写无题', '写到深处自成诗', '不问来处不问去', '此中真意只自知'],
-    emojis: ['📜', '🪶', '🪷'],
+    emoji: '🖋️',
     theme: '自知',
     level: '上',
     do: ['写字', '静坐', '不语', '翻书'],
@@ -537,7 +537,7 @@ export const POEMS: readonly Poem[] = [
   {
     id: 60,
     lines: ['旧友忽来叩柴门', '一坐便是半黄昏', '不必煮酒不必茶', '寒暄两句已是春'],
-    emojis: ['🚪', '🍶', '🏮'],
+    emoji: '🚪',
     theme: '老友叩门',
     level: '上上',
     do: ['开门', '闲坐', '大笑', '共饮'],

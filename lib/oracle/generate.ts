@@ -2,8 +2,6 @@ import { POEMS, DIRECTIONS, LUCKY_NUMS } from './poems';
 import { chance, makeRng, pick } from './rng';
 import type { OracleContext, OracleResult, Rarity } from './types';
 
-const FALLBACK_EMOJIS = ['🫧', '🕳️', '🧿', '☯️', '🪞', '🌫️', '🪶'] as const;
-
 export function buildSeed(ctx: OracleContext): string {
   const y = ctx.date.getFullYear();
   const m = String(ctx.date.getMonth() + 1).padStart(2, '0');
@@ -31,10 +29,8 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
     poem = pool[Math.floor(rng() * pool.length)];
   }
 
-  const emoji = chance(rng, 0.85)
-    ? pick(rng, poem.emojis)
-    : pick(rng, FALLBACK_EMOJIS);
-
+  // emoji 与诗 1:1 绑定，是签的一部分
+  const emoji = poem.emoji;
   const body = poem.lines.join('\n');
 
   const result: OracleResult = {
@@ -55,13 +51,10 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
     result.number = String(1 + Math.floor(rng() * 100));
   }
 
-  // 吉凶等级直接取自诗本身（与诗意绑定），90% 显示
   if (chance(rng, 0.9)) {
     result.level = poem.level;
   }
 
-  // 宜/忌：只从这首诗自己的候选里抽，必然与诗意一致
-  // 70% 同时出宜+忌；20% 只出宜；10% 只出忌
   if (poem.do.length > 0 || poem.dont.length > 0) {
     const r = rng();
     const showDo = r < 0.9 && poem.do.length > 0;
