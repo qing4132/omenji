@@ -111,7 +111,7 @@ export default function Home() {
     if (phase !== 'shaking') return;
     const held = Date.now() - (holdStartRef.current ?? Date.now());
     holdStartRef.current = null;
-    if (held < 250) {
+    if (held < 120) {
       setPhase('idle');
       return;
     }
@@ -144,38 +144,35 @@ export default function Home() {
       </header>
 
       <main className="flex w-full max-w-md flex-1 flex-col items-center justify-center">
-        {phase === 'idle' && !oracle && (
+        {!oracle && (phase === 'idle' || phase === 'shaking') && (
           <button
-            onMouseDown={startShake}
-            onMouseUp={endShake}
-            onMouseLeave={endShake}
-            onTouchStart={(e) => {
+            type="button"
+            onPointerDown={(e) => {
               e.preventDefault();
+              try {
+                (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+              } catch {}
               startShake();
             }}
-            onTouchEnd={(e) => {
-              e.preventDefault();
-              endShake();
-            }}
-            className="group flex h-64 w-44 select-none flex-col items-center justify-center rounded-full border border-zinc-400/40 bg-gradient-to-b from-amber-50 to-amber-100 shadow-inner transition-transform active:scale-95 dark:from-zinc-800 dark:to-zinc-900"
+            onPointerUp={() => endShake()}
+            onPointerCancel={() => endShake()}
+            style={{ touchAction: 'none' }}
+            className={`flex h-64 w-44 select-none flex-col items-center justify-center rounded-full border border-zinc-400/40 bg-gradient-to-b shadow-inner transition-colors active:scale-[0.98] ${
+              phase === 'shaking'
+                ? 'animate-[shake_0.25s_ease-in-out_infinite] from-amber-100 to-amber-200 dark:from-zinc-700 dark:to-zinc-800'
+                : 'from-amber-50 to-amber-100 dark:from-zinc-800 dark:to-zinc-900'
+            }`}
           >
-            <span className="text-5xl">🪄</span>
-            <span className="mt-4 text-sm tracking-widest text-zinc-600 dark:text-zinc-400">
-              按住摇签
-            </span>
-            <span className="mt-1 text-[10px] tracking-wider text-zinc-400">
-              桌面端：按住空格
-            </span>
-          </button>
-        )}
-
-        {phase === 'shaking' && (
-          <div className="flex h-64 w-44 animate-[shake_0.25s_ease-in-out_infinite] flex-col items-center justify-center rounded-full border border-zinc-400/40 bg-gradient-to-b from-amber-100 to-amber-200 shadow-inner dark:from-zinc-700 dark:to-zinc-800">
-            <span className="text-5xl">🎋</span>
+            <span className="text-5xl">{phase === 'shaking' ? '🎋' : '🪄'}</span>
             <span className="mt-4 text-sm tracking-widest text-zinc-700 dark:text-zinc-300">
-              摇…摇…摇…
+              {phase === 'shaking' ? '摇…摇…摇…' : '按住摇签'}
             </span>
-          </div>
+            {phase === 'idle' && (
+              <span className="mt-1 text-[10px] tracking-wider text-zinc-400">
+                桌面端：按住空格
+              </span>
+            )}
+          </button>
         )}
 
         {(phase === 'revealing' || phase === 'done') && oracle && (
