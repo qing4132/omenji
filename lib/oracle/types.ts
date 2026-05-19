@@ -24,8 +24,8 @@ export type OracleResult = {
   body: string;
   number?: string;
   level?: Level;
-  do?: string;
-  dont?: string;
+  do?: readonly string[];
+  dont?: readonly string[];
   direction?: string;
   lucky?: string;
   rarity: Rarity;

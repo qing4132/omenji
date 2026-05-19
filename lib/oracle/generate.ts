@@ -1,4 +1,4 @@
-import { POEMS, DIRECTIONS, LUCKY_NUMS } from './poems';
+import { POEMS, DIRECTIONS, LUCKY_NUMS, GLOBAL_DO, GLOBAL_DONT } from './poems';
 import { chance, makeRng, pick } from './rng';
 import type { OracleContext, OracleResult, Rarity } from './types';
 
@@ -29,7 +29,6 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
     poem = pool[Math.floor(rng() * pool.length)];
   }
 
-  // emoji 与诗 1:1 绑定，是签的一部分
   const emoji = poem.emoji;
   const body = poem.lines.join('\n');
 
@@ -54,16 +53,23 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
   // 吉凶等级 = 诗本身决定的核心信息，必显示
   result.level = poem.level;
 
-  if (poem.do.length > 0 || poem.dont.length > 0) {
-    const r = rng();
-    const showDo = r < 0.9 && poem.do.length > 0;
-    const showDont = (r < 0.7 || r >= 0.9) && poem.dont.length > 0;
-    if (showDo) result.do = pick(rng, poem.do);
-    if (showDont) result.dont = pick(rng, poem.dont);
+  // 宜/忌：固定各 2 个 = 1 个贴题（诗自带）+ 1 个野生（全局池）
+  if (poem.do.length > 0) {
+    const themed = pick(rng, poem.do);
+    const wildPool = GLOBAL_DO.filter((w) => w !== themed);
+    const wild = pick(rng, wildPool);
+    result.do = [themed, wild];
+  }
+  if (poem.dont.length > 0) {
+    const themed = pick(rng, poem.dont);
+    const wildPool = GLOBAL_DONT.filter((w) => w !== themed);
+    const wild = pick(rng, wildPool);
+    result.dont = [themed, wild];
   }
 
-  if (chance(rng, 0.3)) result.direction = pick(rng, DIRECTIONS);
-  if (chance(rng, 0.3)) result.lucky = pick(rng, LUCKY_NUMS);
+  // 方位/数字：必显示
+  result.direction = pick(rng, DIRECTIONS);
+  result.lucky = pick(rng, LUCKY_NUMS);
 
   return result;
 }
@@ -77,8 +83,8 @@ export function formatOracle(o: OracleResult): string {
   lines.push('');
   lines.push(o.body);
   const tail: string[] = [];
-  if (o.do) tail.push(`宜：${o.do}`);
-  if (o.dont) tail.push(`忌：${o.dont}`);
+  if (o.do) tail.push(`宜：${o.do.join('、')}`);
+  if (o.dont) tail.push(`忌：${o.dont.join('、')}`);
   if (o.direction) tail.push(`方位：${o.direction}`);
   if (o.lucky) tail.push(`数：${o.lucky}`);
   if (tail.length) {
