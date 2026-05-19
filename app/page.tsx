@@ -71,7 +71,7 @@ export default function Home() {
         if (typingTimerRef.current) clearInterval(typingTimerRef.current);
         setPhase('done');
       }
-    }, 90);
+    }, 140);
   }, []);
 
   useEffect(() => {
@@ -194,24 +194,19 @@ export default function Home() {
                 </span>
               )}
             </div>
-            <p className="whitespace-pre-line text-center text-xl leading-relaxed tracking-wide">
+            <p className="whitespace-pre-line text-center font-serif text-2xl leading-loose tracking-[0.2em] text-zinc-800 dark:text-zinc-100">
               {typed}
               {phase === 'revealing' && (
                 <span className="ml-0.5 inline-block w-2 animate-pulse">▍</span>
               )}
             </p>
-            {phase === 'done' && oracle.note && (
-              <p className="text-center text-xs tracking-wider text-zinc-500">
-                — {oracle.note}
-              </p>
-            )}
             {phase === 'done' &&
               (oracle.do || oracle.dont || oracle.direction || oracle.lucky) && (
                 <div className="mt-2 grid grid-cols-2 gap-2 text-sm text-zinc-600 dark:text-zinc-400">
                   {oracle.do && <div>宜　{oracle.do}</div>}
                   {oracle.dont && <div>忌　{oracle.dont}</div>}
                   {oracle.direction && <div>方位　{oracle.direction}</div>}
-                  {oracle.lucky && <div>数字　{oracle.lucky}</div>}
+                  {oracle.lucky && <div>数　{oracle.lucky}</div>}
                 </div>
               )}
           </div>

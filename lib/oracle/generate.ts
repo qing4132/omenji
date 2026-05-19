@@ -1,45 +1,8 @@
-import { GOLDENS } from './goldens';
-import { EMOJIS, RARE_EMOJIS } from './emoji';
-import { SKELETONS } from './skeletons';
-import { SLOTS } from './slots';
-import { chance, makeRng, pick, weightedPick } from './rng';
-import type {
-  OracleContext,
-  OracleResult,
-  PRNG,
-  Rarity,
-  SlotKey,
-  SlotPicker,
-} from './types';
+import { POEMS, DO_ITEMS, DONT_ITEMS, DIRECTIONS, LUCKY_NUMS, LEVELS } from './poems';
+import { chance, makeRng, pick } from './rng';
+import type { OracleContext, OracleResult, Rarity } from './types';
 
-const LEVELS = ['上上', '上', '中', '下', '下下', '无'] as const;
-
-function makePicker(rng: PRNG): SlotPicker {
-  return {
-    rng,
-    pick: <T,>(arr: readonly T[]) => pick(rng, arr),
-    pickN: <T,>(arr: readonly T[], n: number) => {
-      const pool = [...arr];
-      const out: T[] = [];
-      for (let i = 0; i < n && pool.length > 0; i++) {
-        const idx = Math.floor(rng() * pool.length);
-        out.push(pool.splice(idx, 1)[0]);
-      }
-      return out;
-    },
-    chance: (p: number) => chance(rng, p),
-    slot: (key: SlotKey) => pick(rng, SLOTS[key]),
-  };
-}
-
-function rollRarity(rng: PRNG): Rarity {
-  const r = rng();
-  if (r < 0.001) return 'meta';
-  if (r < 0.006) return 'sequence';
-  if (r < 0.026) return 'hidden';
-  if (r < 0.096) return 'uncommon';
-  return 'common';
-}
+const FALLBACK_EMOJIS = ['🫧', '🕳️', '🧿', '☯️', '🪞', '🌫️', '🪶'] as const;
 
 export function buildSeed(ctx: OracleContext): string {
   const y = ctx.date.getFullYear();
@@ -48,72 +11,62 @@ export function buildSeed(ctx: OracleContext): string {
   return `${y}-${m}-${d}:${ctx.fingerprint}`;
 }
 
+function rollRarity(rng: () => number): Rarity {
+  const r = rng();
+  if (r < 0.005) return 'meta';
+  if (r < 0.06) return 'rare';
+  return 'common';
+}
+
 export function generate(seedOrCtx: string | OracleContext): OracleResult {
   const seed = typeof seedOrCtx === 'string' ? seedOrCtx : buildSeed(seedOrCtx);
   const rng = makeRng(seed);
-  const s = makePicker(rng);
   const rarity = rollRarity(rng);
 
-  // Meta sign: 元签
+  let poem;
   if (rarity === 'meta') {
-    return {
-      emoji: pick(rng, RARE_EMOJIS),
-      body: '此签无文。',
-      rarity,
-      skeletonId: 'meta',
-      seed,
-    };
-  }
-
-  // Body: 30% goldens / 65% skeleton / 5% goldens+skeleton 混合（按需）
-  let body: string;
-  let skeletonId: string;
-  const bodyRoll = rng();
-  if (bodyRoll < 0.3) {
-    body = pick(rng, GOLDENS);
-    skeletonId = 'golden';
+    poem = POEMS.find((p) => p.id === 30) ?? POEMS[POEMS.length - 1];
   } else {
-    // 罕见档优先抽 uncommon 骨架
-    const pool =
-      rarity === 'uncommon' || rarity === 'hidden'
-        ? SKELETONS.filter((k) => k.rarity === 'uncommon')
-        : SKELETONS.filter((k) => !k.rarity || k.rarity === 'common');
-    const sk = weightedPick(rng, pool.length ? pool : SKELETONS);
-    body = sk.render(s);
-    skeletonId = sk.id;
+    const pool = POEMS.filter((p) => p.id !== 30);
+    poem = pool[Math.floor(rng() * pool.length)];
   }
 
-  // Emoji 独立采样；rare 档偶尔用 RARE_EMOJIS
-  const emoji =
-    rarity !== 'common' && chance(rng, 0.3)
-      ? pick(rng, RARE_EMOJIS)
-      : pick(rng, EMOJIS);
+  const emoji = chance(rng, 0.85)
+    ? pick(rng, poem.emojis)
+    : pick(rng, FALLBACK_EMOJIS);
 
-  // 每个槽位独立出现概率
+  const body = poem.lines.join('\n');
+
   const result: OracleResult = {
     emoji,
+    poemId: poem.id,
     body,
     rarity,
-    skeletonId,
     seed,
   };
 
-  if (chance(rng, 0.45)) result.number = String(1 + Math.floor(rng() * 100));
-  if (chance(rng, 0.55)) result.level = pick(rng, LEVELS);
-  if (chance(rng, 0.5)) result.do = s.slot('doItem');
-  if (chance(rng, 0.5)) result.dont = s.slot('dontItem');
-  if (chance(rng, 0.35)) result.direction = s.slot('direction');
-  if (chance(rng, 0.35)) {
-    result.lucky = String(1 + Math.floor(rng() * 99));
+  if (rarity === 'meta') {
+    result.number = '〇';
+    result.level = '空';
+    return result;
   }
-  if (chance(rng, 0.25)) {
-    // 小字注解：用另一个骨架
-    const noteSk = weightedPick(
-      rng,
-      SKELETONS.filter((k) => !k.rarity)
-    );
-    result.note = noteSk.render(s);
+
+  if (chance(rng, 0.8)) {
+    result.number = String(1 + Math.floor(rng() * 100));
   }
+  if (chance(rng, 0.85)) {
+    if (rarity === 'rare') {
+      result.level = pick(rng, ['上上', '上上', '下下', '下下', '空'] as const);
+    } else {
+      result.level = pick(rng, LEVELS);
+    }
+  }
+  if (chance(rng, 0.6)) {
+    result.do = pick(rng, DO_ITEMS);
+    result.dont = pick(rng, DONT_ITEMS);
+  }
+  if (chance(rng, 0.3)) result.direction = pick(rng, DIRECTIONS);
+  if (chance(rng, 0.3)) result.lucky = pick(rng, LUCKY_NUMS);
 
   return result;
 }
@@ -126,12 +79,11 @@ export function formatOracle(o: OracleResult): string {
   lines.push(head.join('  '));
   lines.push('');
   lines.push(o.body);
-  if (o.note) lines.push(`  — ${o.note}`);
   const tail: string[] = [];
   if (o.do) tail.push(`宜：${o.do}`);
   if (o.dont) tail.push(`忌：${o.dont}`);
   if (o.direction) tail.push(`方位：${o.direction}`);
-  if (o.lucky) tail.push(`数字：${o.lucky}`);
+  if (o.lucky) tail.push(`数：${o.lucky}`);
   if (tail.length) {
     lines.push('');
     lines.push(tail.join('　'));
