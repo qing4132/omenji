@@ -46,23 +46,26 @@ export function generate(seedOrCtx: string | OracleContext): OracleResult {
     return result;
   }
 
-  if (chance(rng, 0.8)) {
-    result.number = String(1 + Math.floor(rng() * 100));
-  }
+  // 签号：必显示
+  result.number = String(1 + Math.floor(rng() * 100));
 
   // 吉凶等级 = 诗本身决定的核心信息，必显示
   result.level = poem.level;
 
   // 宜/忌：固定各 2 个 = 1 个贴题（诗自带）+ 1 个野生（全局池）
+  // 野生项会过滤掉诗的 dont（对于宜）/ do（对于忌），
+  // 保证不会明显与诗反着
   if (poem.do.length > 0) {
     const themed = pick(rng, poem.do);
-    const wildPool = GLOBAL_DO.filter((w) => w !== themed);
+    const blocked = new Set<string>([themed, ...poem.dont]);
+    const wildPool = GLOBAL_DO.filter((w) => !blocked.has(w));
     const wild = pick(rng, wildPool);
     result.do = [themed, wild];
   }
   if (poem.dont.length > 0) {
     const themed = pick(rng, poem.dont);
-    const wildPool = GLOBAL_DONT.filter((w) => w !== themed);
+    const blocked = new Set<string>([themed, ...poem.do]);
+    const wildPool = GLOBAL_DONT.filter((w) => !blocked.has(w));
     const wild = pick(rng, wildPool);
     result.dont = [themed, wild];
   }
