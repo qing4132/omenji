@@ -188,11 +188,6 @@ export default function Home() {
                   {oracle.level}签
                 </span>
               )}
-              {oracle.rarity !== 'common' && (
-                <span className="rounded-full border border-amber-500/60 px-2 py-0.5 text-amber-600">
-                  {oracle.rarity}
-                </span>
-              )}
             </div>
             <p className="whitespace-pre-line text-center font-serif text-2xl leading-loose tracking-[0.2em] text-zinc-800 dark:text-zinc-100">
               {typed}

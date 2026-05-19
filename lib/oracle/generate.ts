@@ -10,10 +10,8 @@ export function buildSeed(ctx: OracleContext): string {
 }
 
 function rollRarity(rng: () => number): Rarity {
-  const r = rng();
-  if (r < 0.005) return 'meta';
-  if (r < 0.06) return 'rare';
-  return 'common';
+  // 0.5% 元签，其余皆普通
+  return rng() < 0.005 ? 'meta' : 'common';
 }
 
 export function generate(seedOrCtx: string | OracleContext): OracleResult {
@@ -95,9 +93,9 @@ export function formatOracle(o: OracleResult): string {
     lines.push('');
     lines.push(tail.join('　'));
   }
-  if (o.rarity !== 'common') {
+  if (o.rarity === 'meta') {
     lines.push('');
-    lines.push(`（${o.rarity}）`);
+    lines.push(`（元签）`);
   }
   return lines.join('\n');
 }

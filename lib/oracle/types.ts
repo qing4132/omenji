@@ -1,6 +1,6 @@
 export type Level = '上上' | '上' | '中' | '下' | '下下' | '空';
 
-export type Rarity = 'common' | 'rare' | 'meta';
+export type Rarity = 'common' | 'meta';
 
 export type PRNG = () => number;
 
