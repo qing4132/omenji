@@ -1,36 +1,159 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Omenji 签出
 
-## Getting Started
+> omen + emoji — 摇一摇手机/点一下，掉出一个 emoji 签，配一段不知所云但很有禅意的解签。
 
-First, run the development server:
+中文名：**签出**　英文名：**Omenji**（发音 oh-MEN-jee）
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 这是什么
+
+一个轻量级的"赛博求签"小应用。核心体验：
+
+1. 用户做一个"摇签"的动作（手机端摇一摇 / 桌面端按住空格再松开）
+2. 一个 emoji 弹出
+3. 一段"看起来很有道理但其实不知所云"的签文逐字打出
+4. 可保存为竖版长图分享
+
+不是命理工具，是**带仪式感的轻幽默 + 当代生活吐槽**。
+
+---
+
+## 设计原则
+
+### 1. 仪式感 > 功能
+晃动音效、签筒动画、emoji 慢慢浮现、签文 typewriter 出字。整个抽签过程要让用户**愿意等几秒钟**。
+
+### 2. 一天一签（默认）
+基于日期 + 用户指纹做随机种子，今天再摇也是同一支。想强行重摇？"诚心不足，需净手三次" —— 点三下屏幕解锁。逼用户明天再来。
+
+### 3. 反随机感
+玩家最容易识破的就是"模式"。一旦看穿 `[A]_[B]_[C]` 结构，神秘感归零。所以**结构本身必须多样**，见下方"签文生成架构"。
+
+### 4. 反差是笑点来源
+- emoji 越普通，解签越玄（🧻 配上上签）
+- emoji 越仙气，解签越接地气（🌙 配"宜：还花呗"）
+- emoji 与签文**大部分时候是错配的**，错配本身就是禅意
+
+### 5. 可分享性
+抽完生成一张竖版长图卡片（emoji + 签文 + 日期 + 水印），一键保存。URL 带 seed 参数，朋友间可复现同一支签。
+
+---
+
+## 签文生成架构（核心难点）
+
+**单一模板必死。** 用户玩 3-5 次就能识破结构。解决方案是多层次打散：
+
+### Layer 1：句式骨架池（20+ 种）
+
+不只是"意象 + 动作"，而是完全不同的语法骨架，互相之间长得不像：
+
+- **判断句**：「是 X，也是 Y。」
+- **反问句**：「X 又如何？Y 又如何？」
+- **古文残卷腔**：「X 者，Y 也。Z 之谓也。」
+- **天气预报体**：「今日 X 转 Y，局部有 Z。」
+- **说明书体**：「使用前请 X。出现 Y 属正常现象。」
+- **数学公式体**：「X + Y = Z，其中 Z 不可解。」
+- **菜谱体**：「取 X 一两，配 Y 少许，冷藏至 Z。」
+- **新闻通稿体**：「据悉，X 已于今日 Y。当事人表示 Z。」
+- **歌词残句体**：单独一句没头没尾的话
+- **纯意象**：只有三个名词，不解释 → "旧伞。便利店。回声。"
+- **对话体**：「问：X？答：Y。」
+- **签谱古文体**：「上上签。X 临 Y 位，主 Z。」
+- **空白签**：整支签只有一个标点 → "。"
+
+每次抽签**先随机骨架，再填内容**。
+
+### Layer 2：模块化组件（每个槽位都可能不出现）
+
+```
+[emoji] · [可选:签号] · [可选:吉凶等级]
+[主签文 —— 从骨架池随机]
+[可选:小字注解 —— 另一个骨架]
+[可选:宜] · [可选:忌] · [可选:方位] · [可选:数字]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+输出的**形态本身在变**：有时完整一张签，有时只有 emoji + "。"，有时多一行"此签于 23:00 后失效"的小字注解。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Layer 3：emoji 与签文的"互文"而非"配对"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+不做 `emoji → 签文池` 的硬映射。两者独立随机出，只有约 20% 概率主题相关。**错配本身就是笑点。**
 
-## Learn More
+### Layer 4：罕见事件（长尾刺激）
 
-To learn more about Next.js, take a look at the following resources:
+| 概率 | 内容 |
+|---|---|
+| 90% | 普通签 |
+| 7% | 稀有签（特殊骨架，比如整支签只有一个字） |
+| 2% | 隐藏签（要求用户做交互才显示后半段） |
+| 0.5% | 序列签（连抽 3 天解锁一段完整故事） |
+| 0.1% | 元签（"你已抽中第 1000 支签，此签无文"） |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+90 天才撞见一次的东西，社区会自动传播。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Layer 5：上下文感知（最反"随机感"的一招）
 
-## Deploy on Vercel
+让签**看起来在回应你**：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **时间**：凌晨 3 点抽 → "宜：合上手机"；周一早上 → "忌：开会发言"
+- **天气**（免费 API）：下雨天 → 签文里"伞/湿/屋檐"概率提高
+- **抽签间隔**：刚抽过 10 秒又抽 → "急什么。"
+- **农历节气**：清明节当天换一套签库
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+用户不会去验证，但会觉得"这玩意儿好像有点东西"。
+
+---
+
+## 内容生产策略
+
+- **手写 200 句金句**（不带槽位，整句独立成立）—— 撑住质量上限
+- **手写 100 个槽位词** per 类，配 20 个骨架 —— 撑住数量下限
+- **LLM 不直接生成签文**，只用于扩写骨架变体（"把这句改写成天气预报体"），人工筛一遍入库
+- 出现比例建议：金句 30% / 模板拼装 65% / 罕见 5%
+
+**金句保下限，模板保数量，罕见保惊喜。**
+
+---
+
+## 技术选型（待定）
+
+- 前端：Next.js + TypeScript + Tailwind（符合 user workflow 偏好）
+- 动画：Framer Motion
+- 长图生成：`html-to-image` 或 canvas
+- 词库：纯 JSON，零后端 MVP
+- 部署：Vercel
+- 包管理：`pnpm` 或 `bun`（Next.js 项目）
+
+无后端、无数据库。一天一签的种子用 `日期 + localStorage 指纹` 在前端算。
+
+---
+
+## Roadmap
+
+### MVP（先跑通）
+- [ ] 项目脚手架
+- [ ] 签文生成器核心（骨架 + 槽位 + 概率分层）
+- [ ] 词库 JSON 结构定稿
+- [ ] 摇一摇手势 + 桌面端按空格
+- [ ] 签文 typewriter 动画
+- [ ] 一天一签 seed 逻辑
+
+### V1（值得发朋友圈）
+- [ ] 长图分享卡片
+- [ ] URL seed 复现
+- [ ] 时间感知（凌晨 / 周一等）
+- [ ] 罕见签事件
+- [ ] 至少 100 句手写金句入库
+
+### V2（看精力加）
+- [ ] 天气 API 接入
+- [ ] 序列签 / 元签
+- [ ] 签谱页（翻看历史所有签）
+- [ ] 三签合一（天/地/人）
+
+---
+
+## 命名由来
+
+- **Omenji** = omen（预兆）+ emoji，发音 oh-MEN-jee
+- **签出** = 抽签 + `git checkout` 的赛博梗，"签入/签谱/签到"都可作为后续功能延伸
